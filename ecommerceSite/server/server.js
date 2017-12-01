@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // use JWT auth to secure the api, the token can be passed in the authorization header or querystring
-app.use(expressJwt({
+/*app.use(expressJwt({
     secret: config.secret,
     getToken: function (req) {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -21,7 +21,7 @@ app.use(expressJwt({
         }
         return null;
     }
-}).unless({ path: ['/users/authenticate', '/users/register'] }));
+}).unless({ path: ['/users/authenticate', '/users/register'] }));*/
 
 // routes
 app.use('/users', require('./controllers/users.controller'));
