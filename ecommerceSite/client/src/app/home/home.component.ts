@@ -16,7 +16,8 @@ import { AlertService, AuthenticationService } from '../_services/index';
         '../css/font-awesome.css',
         '../css/animate.min.css',
         '../css/owl.theme.css',
-        '../css/custom.css'
+        '../css/custom.css',
+        'home.component.css'
     ]
 })
 
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
     users: User[] = [];
     products: Product[] = [];
     returnUrl: string;
+    sliderimg: string;
 
     // login-modal attributes
     model: any = {};
@@ -38,6 +40,7 @@ export class HomeComponent implements OnInit {
         private router: Router,
         private alertService: AlertService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.sliderimg = '/assets/main-slider1.jpg';
     }
 
 
