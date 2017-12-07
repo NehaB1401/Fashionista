@@ -24,18 +24,19 @@
 
 
     <!-- styles -->
-    <link ng-href=".src/app/css/font-awesome.css" rel="stylesheet">
+    <link ng-href="./src/app/css/font-awesome.css" rel="stylesheet">
+    <link ng-href=".src/app/css/bootstrap.min.css" rel="stylesheet">
     <link ng-href="./src/app/css/animate.min.css" rel="stylesheet">
     <link ng-href="./src/app/css/owl.carousel.css" rel="stylesheet">
     <link ng-href="./src/app/css/owl.theme.css" rel="stylesheet">
 
     <!-- theme stylesheet -->
-    <link ng-href="../css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+    <link ng-href=".src/app/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
 
     <!-- your stylesheet with modifications -->
-    <link ng-href="../css/custom.css" rel="stylesheet">
+    <link ng-href=".src/app/css/custom.css" rel="stylesheet">
 
-    <script src="../js/respond.min.js"></script>
+    <script src=".src/app/js/respond.min.js"></script>
 
     <link rel="shortcut icon" href="../favicon.png">
 
@@ -56,12 +57,12 @@
                 <ul class="menu">
                     <h5 id = "username" *ngIf="currentUser">Hi {{currentUser.firstName}}!</h5>
                     <li>
-                        <!--<button id="login" (click)="redirectLogin();">Wassup</button> -->
-                        <!-- <p><a [routerLink]="['/login']">Logout</a></p> -->                        
                         <a *ngIf="currentUser; else noUser" [routerLink]="['/home']">Logout</a>
                         <ng-template #noUser><a id="login" (click)="redirectLogin();">Login</a></ng-template>
                     </li>
-                    <li><a href="register.html">Register</a>
+                    <li><a [routerLink]="['/register']">Register</a>
+                    </li>
+                    <li><a id="chat" (click)="chat();">Chat</a>
                     </li>
                     <li><a href="contact.html">Contact</a>
                     </li>
@@ -71,9 +72,7 @@
             </div>
         </div>
         <div class="modal" id="login-modal">
-            <!-- <div class="modal" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true"> -->
             <div class="modal-dialog modal-sm">
-
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -81,16 +80,6 @@
                     </div>
                     <div class="modal-body">
                         <form action="customer-orders.html" method="post">
-                            <!-- <div class="form-group">
-                                <input type="text" class="form-control" id="email-modal" placeholder="email">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" id="password-modal" placeholder="password">
-                            </div>
-
-                            <p class="text-center">
-                                <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
-                            </p> -->
                             <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
                                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
                                     <label for="username">Username</label>
@@ -102,23 +91,85 @@
                                     <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
                                     <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
                                 </div>
-                                <div class="form-group">
-                                    <button [disabled]="loading" class="btn btn-primary">Login</button>
-                                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-                                    />
+                                <div class="form-group" class="text-center">
+                                    <button [disabled]="loading" class="btn btn-primary"><i class="fa fa-sign-in"></i>Login</button>
+                                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                                     <!-- <a [routerLink]="['/register']" class="btn btn-link">Register</a> -->
                                 </div>
                             </form>
                         </form>
 
                         <p class="text-center text-muted">Not registered yet?</p>
-                        <p class="text-center text-muted"><a href="register.html"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and
+                        <p class="text-center text-muted"><a [routerLink]="['/register']"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and
                             gives you access to special discounts and much more!</p>
 
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Integrated the Chat Application -->
+        <div class="chatmodal" id="chat-modal">
+            <div class="chatmodal-dialog modal-sm">
+
+                <div class="chatmodal-content">
+                    <div class="chatmodal-header">
+                        <button type="button" class="close" data-dismiss="chatmodal" aria-hidden="true">&times;</button>
+                        <h4 class="chatmodal-title" id="Login">Chat</h4>
+                    </div>
+                    <div class="chatmodal-body">
+                        <div>
+                            <div class="main">
+                              <div class="firstSubChild contain">
+                                <div class="header">
+                                  <h2>Messages</h2>
+                                  <div class="chat-box">
+                                    <div class="message-box">
+                                      <div>
+                                        <ul id="messages" class="message"></ul>
+                                      </div>
+                                      <div class="enter-message">
+                                        <input id="message-boxID" #messagebox placeholder="Type your message here" (keyup)="sendMessageOnEnter($event, messagebox)"  (keydown)="update()" autocomplete="off" value="" autofocus required>
+                                        <button class="send" (click)="sendMessage(messagebox)">Send</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="secondSubChild">
+                                <div class=user-alert>
+                                  <div id="newUserID" *ngIf="newUser">
+                                    {{newUserName}} joined Chat!
+                                  </div>
+                                  <div id="leftUserID" *ngIf="exitedUser">
+                                    {{exitedUserName}} left the Chat!
+                                  </div>
+                                </div>
+                                <div class="caption">
+                                  <h2>Connected Users</h2>
+                                </div>
+                                <div class="user-list">
+                                  <ul class="user-list-ul">
+                                      <li *ngFor="let name of clientsNameList" class="user-list__item">
+                                        <div>
+                                          <input class="check-box" type="checkbox" [checked]="true" disabled>
+                                            </div>
+                                          <div class="user-list__content">
+                                                <div class="user-list__name">
+                                                  <div class="text text_size_m">{{name}}</div>
+                                              </div>
+                                            </div>                
+                                        </li>
+                                    </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- End of Chat Application -->
 
     </div>
 
@@ -132,8 +183,8 @@
             <div class="navbar-header">
 
                 <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
-                    <img ng-src="./app/img/logo.png" alt="<<LOGO here>>" class="hidden-xs">
-                    <img ng-src="./app/img/logo-small.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Obaju - go to homepage</span>
+                    <img src="assets/img/logo.png" alt="<<LOGO here>>" class="hidden-xs" id = "opacityror">
+                    <img src="assets/img/logo-small.png" alt="Obaju logo" class="visible-xs" id="opacityror"><span class="sr-only">Obaju - go to homepage</span>
                 </a>
                 <div class="navbar-buttons">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
@@ -293,12 +344,12 @@
                                         <div class="col-sm-3">
                                             <div class="banner">
                                                 <a href="#">
-                                                    <img ng-src="./app/img/banner.jpg" class="img img-responsive" alt="">
+                                                    <img src="assets/img/banner.jpg" class="img img-responsive" alt="" id="opacityror">
                                                 </a>
                                             </div>
                                             <div class="banner">
                                                 <a href="#">
-                                                    <img ng-src="./app/img/banner2.jpg" class="img img-responsive" alt="">
+                                                    <img src="assets/img/banner2.jpg" class="img img-responsive" alt="" id="opacityror">
                                                 </a>
                                             </div>
                                         </div>
@@ -437,18 +488,18 @@
 
             <div class="container">
                 <div class="col-md-12">
-                    <div id="main-slider">
+                    <div id="main-slider" id = "main-slideror">
                         <div class="item">
-                            <img ng-src="./app/img/main-slider1.jpg" alt="" class="img-responsive">
+                            <img src="assets/img/main-slider1.jpg" alt="" class="img-responsive" id="opacityror">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" ng-src="./app/img/main-slider2.jpg" alt="">
+                            <img class="img-responsive" src="assets/img/main-slider2.jpg" alt=""  id="opacityror">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" ng-src="./app/img/main-slider3.jpg" alt="">
+                            <img class="img-responsive" src="assets/img/main-slider3.jpg" alt="" id="opacityror">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" ng-src="./app/img/main-slider4.jpg" alt="">
+                            <img class="img-responsive" src="assets/img/main-slider4.jpg" alt="" id="opacityror">
                         </div>
                     </div>
                     <!-- /#main-slider -->
@@ -522,18 +573,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product1.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product1.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product1_2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product1_2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img ng-src="./app/img/product1.jpg" alt="" class="img-responsive">
+                                    <img src="assets/img/product1.jpg" alt="" class="img-responsive" id="opacityror">
                                 </a>
                                 <div class="text">
                                     <h3><a href="detail.html">Fur coat with very but very very long name</a></h3>
@@ -550,18 +601,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product2_2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product2_2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img ng-src="./app/img/product2.jpg" alt="" class="img-responsive">
+                                    <img src="assets/img/product2.jpg" alt="" class="img-responsive" id="opacityror">
                                 </a>
                                 <div class="text">
                                     <h3><a href="detail.html">White Blouse Armani</a></h3>
@@ -597,18 +648,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product3.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product3.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product3_2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product3_2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img ng-src="./app/img/product3.jpg" alt="" class="img-responsive">
+                                    <img src="assets/img/product3.jpg" alt="" class="img-responsive" id="opacityror">
                                 </a>
                                 <div class="text">
                                     <h3><a href="detail.html">Black Blouse Versace</a></h3>
@@ -625,18 +676,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product3.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product3.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product3_2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product3_2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img ng-src="./app/img/product3.jpg" alt="" class="img-responsive">
+                                    <img src="assets/img/product3.jpg" alt="" class="img-responsive" id="opacityror">
                                 </a>
                                 <div class="text">
                                     <h3><a href="detail.html">Black Blouse Versace</a></h3>
@@ -653,18 +704,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product2_2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product2_2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img ng-src="./app/img/product2.jpg" alt="" class="img-responsive">
+                                    <img src="assets/img/product2.jpg" alt="" class="img-responsive" id="opacityror">
                                 </a>
                                 <div class="text">
                                     <h3><a href="detail.html">White Blouse Versace</a></h3>
@@ -687,18 +738,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product1.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product1.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product1_2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product1_2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img ng-src="./app/img/product1.jpg" alt="" class="img-responsive">
+                                    <img src="assets/img/product1.jpg" alt="" class="img-responsive" id="opacityror">
                                 </a>
                                 <div class="text">
                                     <h3><a href="detail.html">Fur coat</a></h3>
@@ -723,18 +774,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product2_2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product2_2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img ng-src="./app/img/product2.jpg" alt="" class="img-responsive">
+                                    <img src="assets/img/product2.jpg" alt="" class="img-responsive" id="opacityror">
                                 </a>
                                 <div class="text">
                                     <h3><a href="detail.html">White Blouse Armani</a></h3>
@@ -770,18 +821,18 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product3.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product3.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img ng-src="./app/img/product3_2.jpg" alt="" class="img-responsive">
+                                                <img src="assets/img/product3_2.jpg" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <a href="detail.html" class="invisible">
-                                    <img ng-src="./app/img/product3.jpg" alt="" class="img-responsive">
+                                    <img src="assets/img/product3.jpg" alt="" class="img-responsive" id="opacityror">
                                 </a>
                                 <div class="text">
                                     <h3><a href="detail.html">Black Blouse Versace</a></h3>
@@ -812,17 +863,17 @@
                         <div id="get-inspired" class="owl-carousel owl-theme">
                             <div class="item">
                                 <a href="#">
-                                    <img ng-src="./app/img/getinspired1.jpg" alt="Get inspired" class="img-responsive">
+                                    <img src="assets/img/getinspired1.jpg" alt="Get inspired" class="img-responsive" id="opacityror">
                                 </a>
                             </div>
                             <div class="item">
                                 <a href="#">
-                                    <img ng-src="./app/img/getinspired2.jpg" alt="Get inspired" class="img-responsive">
+                                    <img src="assets/img/getinspired2.jpg" alt="Get inspired" class="img-responsive" id="opacityror">
                                 </a>
                             </div>
                             <div class="item">
                                 <a href="#">
-                                    <img ng-src="./app/img/getinspired3.jpg" alt="Get inspired" class="img-responsive">
+                                    <img src="assets/img/getinspired3.jpg" alt="Get inspired" class="img-responsive" id="opacityror">
                                 </a>
                             </div>
                         </div>
