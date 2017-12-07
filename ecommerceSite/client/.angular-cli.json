@@ -21,7 +21,15 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": ["../src/app/js/jquery-1.11.0.min.js",
+        "../src/app/js/bootstrap.min.js",
+        "../src/app/js/jquery.cookie.js",
+        "../src/app/js/waypoints.min.js",
+        "../src/app/js/modernizr.js",
+        "../src/app/js/bootstrap-hover-dropdown.js",
+        "../src/app/js/owl.carousel.min.js",
+        "../src/app/js/front.js"],
+
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

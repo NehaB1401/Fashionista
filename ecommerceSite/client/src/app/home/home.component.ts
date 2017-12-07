@@ -22,8 +22,10 @@ import {Inject} from "@angular/core";
         '../css/animate.min.css',
         '../css/owl.theme.css',
         '../css/custom.css',
-        'home.component.css'
+        'home.component.css',
+        '../css/owl.carousel.css'
     ]
+
 })
 
 export class HomeComponent implements OnInit {
@@ -68,6 +70,8 @@ export class HomeComponent implements OnInit {
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+        this.productService.getAll().subscribe(products => { this.products = products; });
     }
 
     deleteUser(_id: string) {
