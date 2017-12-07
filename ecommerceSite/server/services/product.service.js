@@ -69,7 +69,7 @@ function create(productParam) {
         });
 
     function createProduct() {
-        // set user object to productParam without the cleartext password
+        // set product object to productParam without the cleartext password
         var product = _.omit(productParam, 'password');
 
         db.products.insert(
