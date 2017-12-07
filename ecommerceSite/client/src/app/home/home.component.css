@@ -5,6 +5,7 @@
     opacity: 100%;
 }
 
+
 /* The Modal (background) */
 .chatmodal {
     display: none; /* Hidden by default */
@@ -84,3 +85,4 @@
     from {opacity: 0} 
     to {opacity: 1}
 }
+
