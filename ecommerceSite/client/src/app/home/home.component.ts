@@ -7,6 +7,11 @@ import { ProductService } from '../_services/index';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService, AuthenticationService } from '../_services/index';
 
+import * as globalVars from "../_services/global";
+import $ from "jquery";
+import * as io from "socket.io-client";
+import {Inject} from "@angular/core";
+
 
 @Component({
     moduleId: module.id,
@@ -31,6 +36,18 @@ export class HomeComponent implements OnInit {
     // login-modal attributes
     model: any = {};
     loading = false;
+
+    reference: any;
+    resFlag: boolean = false;
+    newUser: boolean = false;
+    exitedUser: boolean = false;
+    newUserName: string = null;
+    exitedUserName: string = null;
+    sentMessageUsername: string = null;
+    response: string;
+    clientsNameList: number[];
+    message: string;
+    msgCount: number = 0;
 
 
     constructor(private userService: UserService,
@@ -87,6 +104,76 @@ export class HomeComponent implements OnInit {
 
     }
 
+
+    chat() 
+    {
+        // Get the modal
+        var modal = document.getElementById('chat-modal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("chat");
+
+        // When the user clicks on the button, open the modal
+
+        modal.style.display = "block";
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        //Chat Initializing
+        let reference = this;
+        let temp;
+
+        //Check if the user has logged in
+        var chatusername = '';
+        if(null != this.currentUser)
+        {
+            chatusername = this.currentUser.username;
+        }
+        var socket = io.connect("http://localhost:3000?userName="+chatusername);
+        socket.on("broadcastToAll_chatMessage", function(resObj) {            
+            reference.msgCount++;
+            if (reference.sentMessageUsername !== resObj.name) {
+                resObj.name = resObj.name + ": ";
+                temp = $("#messages").length;
+                $("#messages").append($("<li data-index=" + reference.msgCount + ">"));
+                $("li[data-index=" + reference.msgCount + "]").append($("<div class='left-msg' data-index=" + reference.msgCount + ">"));
+                $("div[data-index=" + reference.msgCount + "]").append($("<span class='name'>").text(resObj.name));
+                $("div[data-index=" + reference.msgCount + "]").append($("<span class='msg'>").text(resObj.msg));
+                $("#messages").append($("<br>"));
+    
+            }
+            else if (reference.sentMessageUsername === resObj.name) {
+                $("#messages").append($("<li data-index=" + reference.msgCount + ">"));
+                $("li[data-index=" + reference.msgCount + "]").append($("<div class='right-msg' data-index=" + reference.msgCount + ">"));
+                $("div[data-index=" + reference.msgCount + "]").append($("<span class='msg'>").text(resObj.msg));
+                    $("#messages").append($("<br>"));
+                reference.sentMessageUsername = null;
+            }
+        });
+    
+        socket.on("updateSocketList", function(list){
+            reference.clientsNameList = list;
+        });
+    
+        socket.on("addUserToSocketList", function(username){
+            reference.exitedUser = false;
+            reference.newUser = true;
+            reference.newUserName = username;
+        });
+    
+        socket.on("removeUserFromSocketList", function(username){
+            reference.newUser = false;
+            reference.exitedUser = true;
+            reference.exitedUserName = username;
+        });
+
+    }
+
     login() {
         // Get the modal
         var modal = document.getElementById('login-modal');
@@ -103,4 +190,27 @@ export class HomeComponent implements OnInit {
                     this.loading = false;
                 });
     }
+
+    sendMessage(data) {
+        this.resFlag = true;
+        let reference = this;
+        var socket = io.connect("http://localhost:3000?userName="+this.currentUser.username);
+        socket.emit("chatMessageToSocketServer", data.value, function(respMsg, username){
+            reference.sentMessageUsername = username;
+            reference.response = respMsg;
+        });
+        $("#message-boxID").val(" ");
     }
+  
+    sendMessageOnEnter($event, messagebox) {
+        if ($event.which === 13) { // ENTER_KEY
+            this.sendMessage(messagebox);
+        }
+    }
+  
+    update() {
+        this.resFlag = false;
+        this.newUser = false;
+        this.exitedUser = false;
+    }
+}

@@ -57,12 +57,14 @@
                 <ul class="menu">
                     <h5 id = "username" *ngIf="currentUser">Hi {{currentUser.firstName}}!</h5>
                     <li>
-                        <!--<button id="login" (click)="redirectLogin();">Wassup</button> -->
-                        <!-- <p><a [routerLink]="['/login']">Logout</a></p> -->                        
                         <a *ngIf="currentUser; else noUser" [routerLink]="['/home']">Logout</a>
                         <ng-template #noUser><a id="login" (click)="redirectLogin();">Login</a></ng-template>
                     </li>
                     <li><a [routerLink]="['/register']">Register</a>
+
+                    </li>
+                    <li><a id="chat" (click)="chat();">Chat</a>
+
                     </li>
                     <li><a href="contact.html">Contact</a>
                     </li>
@@ -72,9 +74,7 @@
             </div>
         </div>
         <div class="modal" id="login-modal">
-            <!-- <div class="modal" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true"> -->
             <div class="modal-dialog modal-sm">
-
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -82,16 +82,6 @@
                     </div>
                     <div class="modal-body">
                         <form action="customer-orders.html" method="post">
-                            <!-- <div class="form-group">
-                                <input type="text" class="form-control" id="email-modal" placeholder="email">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" id="password-modal" placeholder="password">
-                            </div>
-
-                            <p class="text-center">
-                                <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
-                            </p> -->
                             <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
                                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
                                     <label for="username">Username</label>
@@ -119,6 +109,69 @@
                 </div>
             </div>
         </div>
+
+        <!-- Integrated the Chat Application -->
+        <div class="chatmodal" id="chat-modal">
+            <div class="chatmodal-dialog modal-sm">
+
+                <div class="chatmodal-content">
+                    <div class="chatmodal-header">
+                        <button type="button" class="close" data-dismiss="chatmodal" aria-hidden="true">&times;</button>
+                        <h4 class="chatmodal-title" id="Login">Chat</h4>
+                    </div>
+                    <div class="chatmodal-body">
+                        <div>
+                            <div class="main">
+                              <div class="firstSubChild contain">
+                                <div class="header">
+                                  <h2>Messages</h2>
+                                  <div class="chat-box">
+                                    <div class="message-box">
+                                      <div>
+                                        <ul id="messages" class="message"></ul>
+                                      </div>
+                                      <div class="enter-message">
+                                        <input id="message-boxID" #messagebox placeholder="Type your message here" (keyup)="sendMessageOnEnter($event, messagebox)"  (keydown)="update()" autocomplete="off" value="" autofocus required>
+                                        <button class="send" (click)="sendMessage(messagebox)">Send</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="secondSubChild">
+                                <div class=user-alert>
+                                  <div id="newUserID" *ngIf="newUser">
+                                    {{newUserName}} joined Chat!
+                                  </div>
+                                  <div id="leftUserID" *ngIf="exitedUser">
+                                    {{exitedUserName}} left the Chat!
+                                  </div>
+                                </div>
+                                <div class="caption">
+                                  <h2>Connected Users</h2>
+                                </div>
+                                <div class="user-list">
+                                  <ul class="user-list-ul">
+                                      <li *ngFor="let name of clientsNameList" class="user-list__item">
+                                        <div>
+                                          <input class="check-box" type="checkbox" [checked]="true" disabled>
+                                            </div>
+                                          <div class="user-list__content">
+                                                <div class="user-list__name">
+                                                  <div class="text text_size_m">{{name}}</div>
+                                              </div>
+                                            </div>                
+                                        </li>
+                                    </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- End of Chat Application -->
 
     </div>
 
