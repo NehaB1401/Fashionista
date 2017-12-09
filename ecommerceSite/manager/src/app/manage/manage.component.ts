@@ -5,7 +5,7 @@ import { User } from '../_models/index';
 //import { UserService } from '../_services/index';
 import { Product } from '../_models/index';
 import { ProductService } from '../_services/index';
-declare var $: any; 
+declare var $: any;
 
 
 
@@ -48,7 +48,7 @@ showProducts() {
 
 addProduct(){
  
-  alert("hi");
+  alert("Added Successfully");
   this.productService.create(this.model)
   .subscribe(
       data => {
@@ -71,7 +71,9 @@ editProduct(product : Product)
 {
   this.appState='edit';
   this.model._id = product._id;
+  this.model.productId= product.productId;
   this.model.productName = product.productName;
+  this.model.type = product.type;
   this.model.totalAvailability = product.totalAvailability;
 }
 
