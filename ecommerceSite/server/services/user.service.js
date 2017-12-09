@@ -159,7 +159,9 @@ function update(productsParam , userParam ) {
         };
         var push = {
            cart:{
-            productName : productsParam.productName    
+            productName : productsParam.productName,
+            productPrice : productsParam.price,
+            cartQuantity : productsParam.totalAvailability
                 }
     };
        
