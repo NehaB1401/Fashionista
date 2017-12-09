@@ -26,12 +26,14 @@ function authenticate(username, password) {
 
         if (user && bcrypt.compareSync(password, user.hash)) {
             // authentication successful
+            let userCart = user.cart;
             deferred.resolve({
                 _id: user._id,
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                token: jwt.sign({ sub: user._id }, config.secret)
+                token: jwt.sign({ sub: user._id }, config.secret),
+                cart : userCart
             });
         } else {
             // authentication failed
