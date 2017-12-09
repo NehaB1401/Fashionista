@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     products: Product[] = [];
     returnUrl: string;
     sliderimg: string;
-
+    appState = 'default';
     // login-modal attributes
     model: any = {};
     loading = false;
@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.loadAllUsers();
+        
         // reset login status
         this.authenticationService.logout();
 
@@ -216,5 +217,26 @@ export class HomeComponent implements OnInit {
         this.resFlag = false;
         this.newUser = false;
         this.exitedUser = false;
+    }
+    addToCart(product: Product , user : User)
+    {   
+        alert(product.productName);
+        this.appState='edit';
+        //alert(_id);
+        //alert(currentUser)
+        //alert(productName);
+        //Set the cart details
+       // var cartDetails = '{"productName" : "productName"}';
+        //alert(cartDetails);
+        alert(JSON.stringify(this.currentUser.cart));
+       // this.currentUser.cart.push[cartDetails];
+        this.userService.update(product , user)
+        .subscribe(
+            data => {
+                 this.alertService.success('Added to cart successfully', true);
+            },
+            error => {
+               this.alertService.error(error);
+            });
     }
 }

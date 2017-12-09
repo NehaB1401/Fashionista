@@ -115,14 +115,18 @@ function create(userParam) {
     return deferred.promise;
 }
 
-function update(_id, userParam) {
+function update(productsParam , userParam ) {
     var deferred = Q.defer();
-
-    // validation
-    db.users.findById(_id, function (err, user) {
+    console.log("Inside server service");
+    console.log(productsParam);
+   // console.log(productParam._id);
+    console.log(userParam._id);
+   
+    db.users.findById(userParam._id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         if (user.username !== userParam.username) {
+            console.log(user.firstName);
             // username has changed so check if the new username is already taken
             db.users.findOne(
                 { username: userParam.username },
@@ -141,6 +145,50 @@ function update(_id, userParam) {
         }
     });
 
+    function updateUser() {
+       // alert("update user serveic.js"+users.cart.productName)
+        // fields to update
+        var set = {
+            
+            username: userParam.username
+            
+           
+        
+           
+            
+        };
+        var push = {
+           cart:{
+            productName : productsParam.productName    
+                }
+    };
+       
+       
+        // update password if it was entered
+        if (userParam.password) {
+            set.hash = bcrypt.hashSync(userParam.password, 10);
+        }
+        let userTestCart = userParam.cart;
+        
+       // console.log(userParam.cart);
+        db.users.update(
+           { _id: mongo.helper.toObjectID(userParam._id) },
+           
+          { $set : set,  $push : push},
+          
+        
+           
+
+           
+            function (err, doc) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
+
+                deferred.resolve();
+            });
+    }
+
+    return deferred.promise;
+}
     function updateUser() {
         // fields to update
         var set = {
@@ -162,7 +210,7 @@ function update(_id, userParam) {
 
                 deferred.resolve();
             });
-    }
+    
 
     return deferred.promise;
 }
