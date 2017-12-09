@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<style>
+  article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; }
+</style>
+</head>
+ <body>
+ <div class="col-md-6 col-md-offset-3">
+  
+  <button [disabled]="loading" (click)="showProducts()" class="btn btn-primary">Show Products</button>
+  
+  <h3>Products:</h3>
+  <ul>
+      
+      <li class="list-group-item"  *ngFor="let product of products">
+              <span  class = "col"(click)="editProduct(product)">Name:{{product.productName}} <br>  Availiblity:{{product.totalAvailability}}</span><br> <a (click)="deleteProduct(product._id)">DELETE</a>
+      </li>
+  </ul>
+   
+  <!-- <form method="post" (ngSubmit)="uploadImage()" enctype="multipart/form-data">
+    <input type="file" id="file" name="file" [(ngModel)]="file">
+    <input type="submit" value="submit">
+    </form> -->
+
+    <input type='file' onchange="readURL(this);" />
+    <img id="blah" src="#" alt="your image" />
+
+
+    
+
+  <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+          <label for="productName">Product Name</label>
+          <input type="text" class="form-control" name="productName" [(ngModel)]="model.productName" #firstName="ngModel" required />
+      </div>
+      <!-- <input type="file" ng-model="editItem._attachments_uri.image" accept="image/*" app-filereader /> -->
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+          <label for="totalAvailability">Availability</label>
+          <input type="number" class="form-control" name="totalAvailability" [(ngModel)]="model.totalAvailability" #lastName="ngModel" required />
+          </div>
+      <div class="form-group">
+         <button [disabled]="loading" (click)="addProduct(model)" class="btn btn-primary">Add Product</button>
+         
+         <button [disabled]="loading" (click)="updateProduct(model)" class="btn btn-primary">Update Product</button>            
+      </div>
+     
+
+  </form>
+  
+ </div> 
+
+ <script>
+
+ function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah')
+                .attr('src', e.target.result)
+                .width(150)
+                .height(200);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+</body>
