@@ -2,6 +2,7 @@
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { User } from '../_models/index';
+import { Product } from '../_models/index';
 
 @Injectable()
 export class UserService {
@@ -19,9 +20,12 @@ export class UserService {
         return this.http.post('/users/register', user);
     }
 
-    update(user: User) {
-        return this.http.put('/users/' + user._id, user);
-    }
+    update(products: Product , user : User ) {
+        // localStorage.setItem('cart', JSON.stringify(Product));
+        alert(user._id +"  user service.ts");
+        alert(products.productName +"  user service.ts");
+         return this.http.put('/users/test' ,{products : products , user : user});
+     }
 
     delete(_id: string) {
         return this.http.delete('/users/' + _id);

@@ -8,7 +8,7 @@ router.post('/authenticate', authenticate);
 router.post('/register', register);
 router.get('/', getAll);
 router.get('/current', getCurrent);
-router.put('/:_id', update);
+router.put('/test', update);
 router.delete('/:_id', _delete);
 
 module.exports = router;
@@ -64,7 +64,9 @@ function getCurrent(req, res) {
 }
 
 function update(req, res) {
-    userService.update(req.params._id, req.body)
+    console.log("Controller");
+    console.log( req.body.user._id);
+    userService.update(req.body.products , req.body.user)
         .then(function () {
             res.sendStatus(200);
         })

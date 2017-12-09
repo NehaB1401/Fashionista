@@ -598,6 +598,12 @@
                                 <div class="text">
                                     <h3><a href="detail.html"> {{product.productName}}</a></h3>
                                     <p class="price"> {{product.price}}</p>
+                                    <button (click)="addToCart(product, currentUser)">add to cart</button>
+                                    <a class="btn btn-default navbar-toggle" [routerLink]="['/basket']">
+                                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">ADD TO CART</span>
+                                    </a>
+                                   
+
                                 </div>
                                 <!-- /.text -->
                             </div>
