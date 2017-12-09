@@ -4,6 +4,11 @@ import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { BasketComponent } from './basket/index';
+import { CheckoutaddressComponent } from './checkoutaddress/index';
+import { DeliveryComponent } from './delivery/index';
+import { PaymentComponent } from './payment/index';
+import { ContactComponent } from './contact/index';
+import { FaqComponent } from './faq/index';
 import { AuthGuard } from './_guards/index';
 
 const appRoutes: Routes = [
@@ -11,7 +16,12 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'basket', component: BasketComponent },
-
+    { path: 'checkoutaddress', component: CheckoutaddressComponent },
+    { path: 'delivery', component: DeliveryComponent },
+    { path: 'payment', component: PaymentComponent },
+    { path: 'contact', component: ContactComponent },
+    { path: 'faq', component: FaqComponent },
+    
     // Neha~ Start of changes 
     { path: 'home', component: HomeComponent},
     // Neha~ End of changes

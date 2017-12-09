@@ -14,6 +14,11 @@ import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { BasketComponent } from './basket/index';
+import { CheckoutaddressComponent } from './checkoutaddress/index';
+import { DeliveryComponent } from './delivery/index';
+import { PaymentComponent } from './payment/index';
+import { ContactComponent } from './contact/index';
+import { FaqComponent } from './faq/index';
 
 @NgModule({
     imports: [
@@ -28,7 +33,12 @@ import { BasketComponent } from './basket/index';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        BasketComponent
+        BasketComponent,
+        CheckoutaddressComponent,
+        DeliveryComponent,
+        PaymentComponent,
+        ContactComponent,
+        FaqComponent
     ],
     providers: [
         customHttpProvider,
