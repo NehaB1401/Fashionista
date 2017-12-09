@@ -13,6 +13,7 @@ import { AlertService, AuthenticationService, UserService, ProductService } from
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
+import { BasketComponent } from './basket/index';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { RegisterComponent } from './register/index';
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        BasketComponent
     ],
     providers: [
         customHttpProvider,
@@ -34,7 +36,8 @@ import { RegisterComponent } from './register/index';
         AlertService,
         AuthenticationService,
         UserService, 
-        ProductService
+        ProductService,
+        
     ],
     bootstrap: [AppComponent]
 })

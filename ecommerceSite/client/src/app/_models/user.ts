@@ -8,7 +8,8 @@
     cart: [{
         productId : string;
         productName : string;
-        cartQuantity : string;
+        cartQuantity : number;
         isAvailable : boolean;
+        productPrice : number
     }];
 }
