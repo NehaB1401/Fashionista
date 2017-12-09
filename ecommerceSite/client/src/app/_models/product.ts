@@ -4,7 +4,7 @@ export class Product {
     productName: string;
     type: string;
     totalAvailability: string;
-    price: string
-    discout: string
+    price: number;
+    discout: string;
     image: string;
 }
