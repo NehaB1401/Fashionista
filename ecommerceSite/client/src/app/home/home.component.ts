@@ -220,15 +220,10 @@ export class HomeComponent implements OnInit {
     }
     addToCart(product: Product , user : User)
     {   
-        alert(product.productName);
+       
         this.appState='edit';
-        //alert(_id);
-        //alert(currentUser)
-        //alert(productName);
-        //Set the cart details
-       // var cartDetails = '{"productName" : "productName"}';
-        //alert(cartDetails);
-        alert(JSON.stringify(this.currentUser.cart));
+        
+       
        // this.currentUser.cart.push[cartDetails];
         this.userService.update(product , user)
         .subscribe(

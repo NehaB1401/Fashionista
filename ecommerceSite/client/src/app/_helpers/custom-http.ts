@@ -29,6 +29,10 @@ export class CustomHttp extends Http {
         return super.delete(appConfig.apiUrl + url, this.addJwt(options)).catch(this.handleError);
     }
 
+   
+
+    
+
     // private helper methods
 
     private addJwt(options?: RequestOptionsArgs): RequestOptionsArgs {
