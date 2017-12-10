@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { User } from '../_models/index';
-//import { UserService } from '../_services/index';
 import { Product } from '../_models/index';
 import { ProductService } from '../_services/index';
 declare var $: any;
 
 
 
-@Component({
+@Component
+({
   moduleId: module.id,
   selector: 'app-manage',
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.css']
 })
-export class ManageComponent implements OnInit {
+
+export class ManageComponent implements OnInit 
+{
   model: any = {};
   currentUser: User;
   product: Product;
@@ -29,92 +30,97 @@ export class ManageComponent implements OnInit {
   file : any = null;
   image: string;
 
-  constructor( private productService: ProductService,
-    private router: Router) 
-{
-//this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-}
+  constructor( private productService: ProductService, private router: Router) 
+   {
 
-ngOnInit() {
-  //this.loadAllUsers();
-}
+   }
 
-// deleteUser(_id: string) {
-//   this.userService.delete(_id).subscribe(() => { this.loadAllUsers() });
-// }
-
-showProducts() {
-  this.productService.getAll().subscribe(products => { this.products = products; });
-}
-
-addProduct(){
- 
-  var imageName = (<HTMLInputElement> document.getElementById('image')).value;
-  var test = imageName.split("\\",3);
-  this.model.image = test[2];
-  alert(this.model.image);
-  this.productService.create(this.model)
-  .subscribe(
-      data => {
-           //this.alertService.success('Addition successful', true);
-      },
-      error => {
-         //this.alertService.error(error);
-      });
-}
-
-deleteProduct(_id: string) {
-  this.productService.delete(_id).subscribe(() => {this.loadAllProducts()});
-}
-
-private loadAllProducts() {
-  this.productService.getAll().subscribe(products => { this.products = products; });
-}
-
-editProduct(product : Product)
-{
-  this.appState='edit';
-  this.model._id = product._id;
-  this.model.productId= product.productId;
-  this.model.productName = product.productName;
-  this.model.type = product.type;
-  this.model.totalAvailability = product.totalAvailability;
-}
-
-
-
-updateProduct(){
+    ngOnInit()
+    {
   
-  this.productService.update(this.model).subscribe(() => {this.loadAllProducts()});
-}
-
-uploadImage(){
-  alert("hi bitches");
-
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#blah')
-                .attr('src', e.target)
-                .width(150)
-                .height(200);
-        };
-
-        reader.readAsDataURL(input.files[0]);
     }
-}
+
+      showProducts() 
+      {
+          this.productService.getAll().subscribe(products => { this.products = products; });
+      }
+
+      addProduct()
+      {
+ 
+            var frontImageName = (<HTMLInputElement> document.getElementById('frontImage')).value;
+            var frontImageNamePath = frontImageName.split("\\",3);
+            this.model.frontImage = frontImageNamePath[2];
+            var backImageName = (<HTMLInputElement> document.getElementById('backImage')).value;
+            var backImageNamePath = backImageName.split("\\",3);
+            this.model.backImage = backImageNamePath[2];
+            this.productService.create(this.model)
+            .subscribe(
+            data => 
+            {
+              
+            },
+          error => 
+          {
+            
+          });
+      }
+
+          deleteProduct(_id: string) 
+          {
+            this.productService.delete(_id).subscribe(() => {this.loadAllProducts()});
+          }
+
+          private loadAllProducts() 
+          {
+            this.productService.getAll().subscribe(products => { this.products = products; });
+          }
+
+        editProduct(product : Product)
+            {
+            this.appState='edit';
+            this.model._id = product._id;
+            this.model.productId= product.productId;
+            this.model.productName = product.productName;
+            this.model.geoType = product.geoType;
+            this.model.genType=product.genType;
+            this.model.wearType=product.wearType;
+            this.model.categoryType=product.categoryType;
+            this.model.rating=product.rating;
+            this.model.popularity=product.popularity;
+            this.model.totalAvailability = product.totalAvailability;
+            this.model.price=product.price;
+            this.model.discount=product.discount;
+          }
+
+                updateProduct()
+              {
+                this.productService.update(this.model).subscribe(() => {this.loadAllProducts()});
+              }
+
+                  uploadImage()
+                  {
+                    alert("hi bitches");
+
+                    function readURL(input) {
+                      if (input.files && input.files[0]) {
+                          var reader = new FileReader();
+
+                          reader.onload = function (e) {
+                              $('#blah')
+                                  .attr('src', e.target)
+                                  .width(150)
+                                  .height(200);
+                          };
+
+                          reader.readAsDataURL(input.files[0]);
+                      }
+                  }
   
   
 }
 
 }
-
-// private loadAllUsers() {
-//   this.userService.getAll().subscribe(users => { this.users = users; });
-// }
-
 
 
 
