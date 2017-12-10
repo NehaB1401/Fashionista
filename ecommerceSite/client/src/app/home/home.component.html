@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script> -->
 
 
     <!-- styles -->
@@ -52,24 +52,31 @@
     <div id="top">
         <div class="container">
             <div class="col-md-6 offer" data-animate="fadeInDown">
-                <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a> <a href="#">Get flat 35% off on orders over $50!</a>
+                <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>
+                <a href="#">Get flat 35% off on orders over $50!</a>
             </div>
             <div class="col-md-6" data-animate="fadeInDown">
                 <ul class="menu">
-                    <h5 id = "username" *ngIf="currentUser">Hi {{currentUser.firstName}}!</h5>
+                    <h5 id="username" *ngIf="currentUser">Hi {{currentUser.firstName}}!</h5>
                     <li>
                         <a *ngIf="currentUser; else noUser" [routerLink]="['/home']">Logout</a>
-                        <ng-template #noUser><a id="login" (click)="redirectLogin();">Login</a></ng-template>
+                        <ng-template #noUser>
+                            <a id="login" (click)="redirectLogin();">Login</a>
+                        </ng-template>
                     </li>
-                    <li><a [routerLink]="['/register']">Register</a>
+                    <li>
+                        <a [routerLink]="['/register']">Register</a>
 
                     </li>
-                    <li><a id="chat" (click)="chat();">Chat</a>
+                    <li>
+                        <a id="chat" (click)="chat();">Chat</a>
 
                     </li>
-                    <li><a href="contact.html">Contact</a>
+                    <li>
+                        <a href="contact.html">Contact</a>
                     </li>
-                    <li><a href="#">Recently viewed</a>
+                    <li>
+                        <a href="#">Recently viewed</a>
                     </li>
                 </ul>
             </div>
@@ -95,16 +102,20 @@
                                     <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
                                 </div>
                                 <div class="form-group" class="text-center">
-                                    <button [disabled]="loading" class="btn btn-primary"><i class="fa fa-sign-in"></i>Login</button>
-                                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                                    <button [disabled]="loading" class="btn btn-primary">
+                                        <i class="fa fa-sign-in"></i>Login</button>
+                                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                                    />
                                     <!-- <a [routerLink]="['/register']" class="btn btn-link">Register</a> -->
                                 </div>
                             </form>
                         </form>
 
                         <p class="text-center text-muted">Not registered yet?</p>
-                        <p class="text-center text-muted"><a [routerLink]="['/register']"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and
-                            gives you access to special discounts and much more!</p>
+                        <p class="text-center text-muted">
+                            <a [routerLink]="['/register']">
+                                <strong>Register now</strong>
+                            </a>! It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!</p>
 
                     </div>
                 </div>
@@ -123,56 +134,57 @@
                     <div class="chatmodal-body">
                         <div>
                             <div class="main">
-                              <div class="firstSubChild contain">
-                                <div class="header">
-                                  <h2>Messages</h2>
-                                  <div class="chat-box">
-                                    <div class="message-box">
-                                      <div>
-                                        <ul id="messages" class="message"></ul>
-                                      </div>
-                                      <div class="enter-message">
-                                        <input id="message-boxID" #messagebox placeholder="Type your message here" (keyup)="sendMessageOnEnter($event, messagebox)"  (keydown)="update()" autocomplete="off" value="" autofocus required>
-                                        <button class="send" (click)="sendMessage(messagebox)">Send</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="secondSubChild">
-                                <div class=user-alert>
-                                  <div id="newUserID" *ngIf="newUser">
-                                    {{newUserName}} joined Chat!
-                                  </div>
-                                  <div id="leftUserID" *ngIf="exitedUser">
-                                    {{exitedUserName}} left the Chat!
-                                  </div>
-                                </div>
-                                <div class="caption">
-                                  <h2>Connected Users</h2>
-                                </div>
-                                <div class="user-list">
-                                  <ul class="user-list-ul">
-                                      <li *ngFor="let name of clientsNameList" class="user-list__item">
-                                        <div>
-                                          <input class="check-box" type="checkbox" [checked]="true" disabled>
+                                <div class="firstSubChild contain">
+                                    <div class="header">
+                                        <h2>Messages</h2>
+                                        <div class="chat-box">
+                                            <div class="message-box">
+                                                <div>
+                                                    <ul id="messages" class="message"></ul>
+                                                </div>
+                                                <div class="enter-message">
+                                                    <input id="message-boxID" #messagebox placeholder="Type your message here" (keyup)="sendMessageOnEnter($event, messagebox)"
+                                                        (keydown)="update()" autocomplete="off" value="" autofocus required>
+                                                    <button class="send" (click)="sendMessage(messagebox)">Send</button>
+                                                </div>
                                             </div>
-                                          <div class="user-list__content">
-                                                <div class="user-list__name">
-                                                  <div class="text text_size_m">{{name}}</div>
-                                              </div>
-                                            </div>                
-                                        </li>
-                                    </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
+                                <div class="secondSubChild">
+                                    <div class=user-alert>
+                                        <div id="newUserID" *ngIf="newUser">
+                                            {{newUserName}} joined Chat!
+                                        </div>
+                                        <div id="leftUserID" *ngIf="exitedUser">
+                                            {{exitedUserName}} left the Chat!
+                                        </div>
+                                    </div>
+                                    <div class="caption">
+                                        <h2>Connected Users</h2>
+                                    </div>
+                                    <div class="user-list">
+                                        <ul class="user-list-ul">
+                                            <li *ngFor="let name of clientsNameList" class="user-list__item">
+                                                <div>
+                                                    <input class="check-box" type="checkbox" [checked]="true" disabled>
+                                                </div>
+                                                <div class="user-list__content">
+                                                    <div class="user-list__name">
+                                                        <div class="text text_size_m">{{name}}</div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    <!-- End of Chat Application -->
+        <!-- End of Chat Application -->
 
     </div>
 
@@ -186,8 +198,9 @@
             <div class="navbar-header">
 
                 <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
-                    <img src="assets/img/logo.png" alt="<<LOGO here>>" class="hidden-xs" id = "opacityror">
-                    <img src="assets/img/logo-small.png" alt="Obaju logo" class="visible-xs" id="opacityror"><span class="sr-only">Obaju - go to homepage</span>
+                    <img src="assets/img/logo.png" alt="<<LOGO here>>" class="hidden-xs" id="opacityror">
+                    <img src="assets/img/logo-small.png" alt="Obaju logo" class="visible-xs" id="opacityror">
+                    <span class="sr-only">Obaju - go to homepage</span>
                 </a>
                 <div class="navbar-buttons">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
@@ -199,7 +212,8 @@
                         <i class="fa fa-search"></i>
                     </button>
                     <a class="btn btn-default navbar-toggle" [routerLink]="['/basket']">
-                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="hidden-xs">3 items in cart</span>
                     </a>
                 </div>
             </div>
@@ -208,74 +222,59 @@
             <div class="navbar-collapse collapse" id="navigation">
 
                 <ul class="nav navbar-nav navbar-left">
-                    <li class="active"><a href="index.html">Home</a>
+                    <li class="active">
+                        <a href="index.html">Home</a>
                     </li>
                     <li class="dropdown yamm-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Men <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Men
+                            <b class="caret"></b>
+                        </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="yamm-content">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <h5>Clothing</h5>
+                                            <h5>Casuals</h5>
                                             <ul>
-                                                <li><a href="category.html">T-shirts</a>
+                                                <li>
+                                                    <a href="category.html">T-shirts</a>
                                                 </li>
-                                                <li><a href="category.html">Shirts</a>
+                                                <li>
+                                                    <a href="category.html">Jeans</a>
                                                 </li>
-                                                <li><a href="category.html">Pants</a>
+                                                <li>
+                                                    <a href="category.html">Jackets</a>
                                                 </li>
-                                                <li><a href="category.html">Accessories</a>
+                                                <li>
+                                                    <a href="category.html">Polos</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
-                                            <h5>Shoes</h5>
+                                            <h5>Formals</h5>
                                             <ul>
-                                                <li><a href="category.html">Trainers</a>
+                                                <li>
+                                                    <a href="category.html">Shirts</a>
                                                 </li>
-                                                <li><a href="category.html">Sandals</a>
+                                                <li>
+                                                    <a href="category.html">Coats & Blazers</a>
                                                 </li>
-                                                <li><a href="category.html">Hiking shoes</a>
+                                                <li>
+                                                    <a href="category.html">Trousers</a>
                                                 </li>
-                                                <li><a href="category.html">Casual</a>
+                                                <li>
+                                                    <a href="category.html">Suits</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
-                                            <h5>Accessories</h5>
+                                            <h5>Party Wear</h5>
                                             <ul>
-                                                <li><a href="category.html">Trainers</a>
+                                                <li>
+                                                    <a href="category.html">T-shirts</a>
                                                 </li>
-                                                <li><a href="category.html">Sandals</a>
-                                                </li>
-                                                <li><a href="category.html">Hiking shoes</a>
-                                                </li>
-                                                <li><a href="category.html">Casual</a>
-                                                </li>
-                                                <li><a href="category.html">Hiking shoes</a>
-                                                </li>
-                                                <li><a href="category.html">Casual</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <h5>Featured</h5>
-                                            <ul>
-                                                <li><a href="category.html">Trainers</a>
-                                                </li>
-                                                <li><a href="category.html">Sandals</a>
-                                                </li>
-                                                <li><a href="category.html">Hiking shoes</a>
-                                                </li>
-                                            </ul>
-                                            <h5>Looks and trends</h5>
-                                            <ul>
-                                                <li><a href="category.html">Trainers</a>
-                                                </li>
-                                                <li><a href="category.html">Sandals</a>
-                                                </li>
-                                                <li><a href="category.html">Hiking shoes</a>
+                                                <li>
+                                                    <a href="category.html">Jeans</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -287,75 +286,75 @@
                     </li>
 
                     <li class="dropdown yamm-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Ladies <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Women
+                            <b class="caret"></b>
+                        </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="yamm-content">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <h5>Clothing</h5>
+                                            <h5>Casuals</h5>
                                             <ul>
-                                                <li><a href="category.html">T-shirts</a>
+                                                <li>
+                                                    <a href="category.html">Tops</a>
                                                 </li>
-                                                <li><a href="category.html">Shirts</a>
+                                                <li>
+                                                    <a href="category.html">Tunics</a>
                                                 </li>
-                                                <li><a href="category.html">Pants</a>
+                                                <li>
+                                                    <a href="category.html">Jeans</a>
                                                 </li>
-                                                <li><a href="category.html">Accessories</a>
+                                                <li>
+                                                    <a href="category.html">Jeggings</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Shorts</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Skirts & Palazoos</a>
+                                                </li>
+                                                <li>
+                                                    <a href="category.html">Jackets</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
-                                            <h5>Shoes</h5>
+                                            <h5>Formals</h5>
                                             <ul>
-                                                <li><a href="category.html">Trainers</a>
+                                                <li>
+                                                    <a href="category.html">Shirts</a>
                                                 </li>
-                                                <li><a href="category.html">Sandals</a>
+                                                <li>
+                                                    <a href="category.html">Coats & Blazer</a>
                                                 </li>
-                                                <li><a href="category.html">Hiking shoes</a>
+                                                <li>
+                                                    <a href="category.html">Trousers</a>
                                                 </li>
-                                                <li><a href="category.html">Casual</a>
+                                                <li>
+                                                    <a href="category.html">Suits</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
-                                            <h5>Accessories</h5>
+                                            <h5>Party Wear</h5>
                                             <ul>
-                                                <li><a href="category.html">Trainers</a>
+                                                <li>
+                                                    <a href="category.html">Dresses</a>
                                                 </li>
-                                                <li><a href="category.html">Sandals</a>
+                                                <li>
+                                                    <a href="category.html">Jumpsuits</a>
                                                 </li>
-                                                <li><a href="category.html">Hiking shoes</a>
+                                                <li>
+                                                    <a href="category.html">Maxi Long</a>
                                                 </li>
-                                                <li><a href="category.html">Casual</a>
-                                                </li>
-                                                <li><a href="category.html">Hiking shoes</a>
-                                                </li>
-                                                <li><a href="category.html">Casual</a>
+                                                <li>
+                                                    <a href="category.html">Party Shorts</a>
                                                 </li>
                                             </ul>
-                                            <h5>Looks and trends</h5>
-                                            <ul>
-                                                <li><a href="category.html">Trainers</a>
-                                                </li>
-                                                <li><a href="category.html">Sandals</a>
-                                                </li>
-                                                <li><a href="category.html">Hiking shoes</a>
-                                                </li>
-                                            </ul>
+
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="banner">
-                                                <a href="#">
-                                                    <img src="assets/img/banner.jpg" class="img img-responsive" alt="" id="opacityror">
-                                                </a>
-                                            </div>
-                                            <div class="banner">
-                                                <a href="#">
-                                                    <img src="assets/img/banner2.jpg" class="img img-responsive" alt="" id="opacityror">
-                                                </a>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <!-- /.yamm-content -->
@@ -364,75 +363,50 @@
                     </li>
 
                     <li class="dropdown yamm-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Template <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Quick Links
+                            <b class="caret"></b>
+                        </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="yamm-content">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <h5>Shop</h5>
+                                            <h5>Site</h5>
                                             <ul>
-                                                <li><a href="index.html">Homepage</a>
+                                                <li>
+                                                    <a href="index.html">Homepage</a>
                                                 </li>
-                                                <li><a href="category.html">Category - sidebar left</a>
+                                                <li>
+                                                    <a href="category-right.html">About Us</a>
                                                 </li>
-                                                <li><a href="category-right.html">Category - sidebar right</a>
+                                                <li>
+                                                    <a href="category-full.html">Contact</a>
                                                 </li>
-                                                <li><a href="category-full.html">Category - full width</a>
-                                                </li>
-                                                <li><a href="detail.html">Product detail</a>
+                                                <li>
+                                                    <a href="detail.html">FAQ</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
                                             <h5>User</h5>
                                             <ul>
-                                                <li><a href="register.html">Register / login</a>
+                                                <li>
+                                                    <a href="register.html">Register / login</a>
                                                 </li>
-                                                <li><a href="customer-orders.html">Orders history</a>
+                                                <li>
+                                                    <a href="basket.html">Shopping cart</a>
                                                 </li>
-                                                <li><a href="customer-order.html">Order history detail</a>
+                                                <li>
+                                                    <a href="customer-orders.html">Orders history</a>
                                                 </li>
-                                                <li><a href="customer-wishlist.html">Wishlist</a>
+                                                <li>
+                                                    <a href="customer-order.html">Order history detail</a>
                                                 </li>
-                                                <li><a href="customer-account.html">Customer account / change password</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <h5>Order process</h5>
-                                            <ul>
-                                                <li><a href="basket.html">Shopping cart</a>
-                                                </li>
-                                                <li><a href="checkout1.html">Checkout - step 1</a>
-                                                </li>
-                                                <li><a href="checkout2.html">Checkout - step 2</a>
-                                                </li>
-                                                <li><a href="checkout3.html">Checkout - step 3</a>
-                                                </li>
-                                                <li><a href="checkout4.html">Checkout - step 4</a>
+                                                <li>
+                                                    <a href="customer-wishlist.html">Wishlist</a>
                                                 </li>
                                             </ul>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <h5>Pages and blog</h5>
-                                            <ul>
-                                                <li><a href="blog.html">Blog listing</a>
-                                                </li>
-                                                <li><a href="post.html">Blog Post</a>
-                                                </li>
-                                                <li><a href="faq.html">FAQ</a>
-                                                </li>
-                                                <li><a href="text.html">Text page</a>
-                                                </li>
-                                                <li><a href="text-right.html">Text page - right sidebar</a>
-                                                </li>
-                                                <li><a href="404.html">404 page</a>
-                                                </li>
-                                                <li><a href="contact.html">Contact</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        </div>                                        
                                     </div>
                                 </div>
                                 <!-- /.yamm-content -->
@@ -447,7 +421,10 @@
             <div class="navbar-buttons">
 
                 <div class="navbar-collapse collapse right" id="basket-overview">
-                    <a [routerLink]="['/basket']" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
+                    <a [routerLink]="['/basket']" class="btn btn-primary navbar-btn">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="hidden-sm">3 items in cart</span>
+                    </a>
                 </div>
                 <!--/.nav-collapse -->
 
@@ -467,9 +444,11 @@
                         <input type="text" class="form-control" placeholder="Search">
                         <span class="input-group-btn">
 
-			<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
 
-		    </span>
+                        </span>
                     </div>
                 </form>
 
@@ -496,7 +475,7 @@
                             <img src="assets/img/main-slider1.jpg" alt="" class="img-responsive" id="opacityror">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="assets/img/main-slider2.jpg" alt=""  id="opacityror">
+                            <img class="img-responsive" src="assets/img/main-slider2.jpg" alt="" id="opacityror">
                         </div>
                         <div class="item">
                             <img class="img-responsive" src="assets/img/main-slider3.jpg" alt="" id="opacityror">
@@ -517,20 +496,26 @@
                     <div class="same-height-row">
                         <div class="col-sm-4">
                             <div class="box same-height clickable">
-                                <div class="icon"><i class="fa fa-heart"></i>
+                                <div class="icon">
+                                    <i class="fa fa-heart"></i>
                                 </div>
 
-                                <h3><a href="#">We love our customers</a></h3>
+                                <h3>
+                                    <a href="#">We love our customers</a>
+                                </h3>
                                 <p>We are known to provide best possible service ever</p>
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="box same-height clickable">
-                                <div class="icon"><i class="fa fa-tags"></i>
+                                <div class="icon">
+                                    <i class="fa fa-tags"></i>
                                 </div>
 
-                                <h3><a href="#">Best prices</a></h3>
+                                <h3>
+                                    <a href="#">Best prices</a>
+                                </h3>
                                 <p>You can check that the height of the boxes adjust when longer text like this one is used
                                     in one of them.</p>
                             </div>
@@ -538,10 +523,13 @@
 
                         <div class="col-sm-4">
                             <div class="box same-height clickable">
-                                <div class="icon"><i class="fa fa-thumbs-up"></i>
+                                <div class="icon">
+                                    <i class="fa fa-thumbs-up"></i>
                                 </div>
 
-                                <h3><a href="#">100% satisfaction guaranteed</a></h3>
+                                <h3>
+                                    <a href="#">100% satisfaction guaranteed</a>
+                                </h3>
                                 <p>Free returns on everything for 3 months.</p>
                             </div>
                         </div>
@@ -572,22 +560,20 @@
                     <div class="product-slider">
                         <!-- <div class="owl-wrapper-outer">
                             <div class="owl-wrapper" style="width: 3648px; left: 0px; display: block;"> -->
-                        
+
                         <div class="item" *ngFor="let product of products">
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front">
                                             <a href="detail.html">
-                                                
-                                                <img src="assets/img/{{product.image}}"
-                                                alt="" class="img-responsive" id="opacityror">
+
+                                                <img src="assets/img/{{product.image}}" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                         <div class="back">
                                             <a href="detail.html">
-                                                <img src="assets/img/{{product.image}}"
-                                                 alt="" class="img-responsive" id="opacityror">
+                                                <img src="assets/img/{{product.image}}" alt="" class="img-responsive" id="opacityror">
                                             </a>
                                         </div>
                                     </div>
@@ -596,22 +582,25 @@
                                     <img src="assets/img/product1.jpg" alt="" class="img-responsive" id="opacityror">
                                 </a>
                                 <div class="text">
-                                    <h3><a href="detail.html"> {{product.productName}}</a></h3>
+                                    <h3>
+                                        <a href="detail.html"> {{product.productName}}</a>
+                                    </h3>
                                     <p class="price"> {{product.price}}</p>
                                     <button (click)="addToCart(product, currentUser)">add to cart</button>
                                     <a class="btn btn-default navbar-toggle" [routerLink]="['/basket']">
-                                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">ADD TO CART</span>
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span class="hidden-xs">ADD TO CART</span>
                                     </a>
-                                   
+
 
                                 </div>
                                 <!-- /.text -->
                             </div>
                             <!-- /.product -->
-                        
-                    </div>
-                       
-                    
+
+                        </div>
+
+
                         <div class="item">
                             <div class="product">
                                 <div class="flip-container">
@@ -632,51 +621,24 @@
                                     <img src="assets/img/product3.jpg" alt="" class="img-responsive" id="opacityror">
                                 </a>
                                 <div class="text">
-                                    <h3><a href="detail.html">Black Blouse Versace</a></h3>
+                                    <h3>
+                                        <a href="detail.html">Black Blouse Versace</a>
+                                    </h3>
                                     <p class="price">$143.00</p>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
 
                     </div>
                     <!-- /.product-slider -->
                 </div>
                 <!-- /.container -->
-            <!-- </div>
+                <!-- </div>
         </div> -->
             </div>
             <!-- /#hot -->
 
             <!-- *** HOT END *** -->
-
-            <!-- *** GET INSPIRED ***
- _________________________________________________________ -->
-            <div class="container" data-animate="fadeInUpBig">
-                <div class="col-md-12">
-                    <div class="box slideshow">
-                        <h3>Get Inspired</h3>
-                        <p class="lead">Get the inspiration from our world class designers</p>
-                        <div id="get-inspired" class="owl-carousel owl-theme">
-                            <div class="item">
-                                <a href="#">
-                                    <img src="assets/img/getinspired1.jpg" alt="Get inspired" class="img-responsive" id="opacityror">
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="#">
-                                    <img src="assets/img/getinspired2.jpg" alt="Get inspired" class="img-responsive" id="opacityror">
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="#">
-                                    <img src="assets/img/getinspired3.jpg" alt="Get inspired" class="img-responsive" id="opacityror">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- *** GET INSPIRED END *** -->
 
             <!-- *** BLOG HOMEPAGE ***
  _________________________________________________________ -->
@@ -686,7 +648,8 @@
                     <div class="col-md-12">
                         <h3 class="text-uppercase">From our blog</h3>
 
-                        <p class="lead">What's new in the world of fashion? <a href="blog.html">Check our blog!</a>
+                        <p class="lead">What's new in the world of fashion?
+                            <a href="blog.html">Check our blog!</a>
                         </p>
                     </div>
                 </div>
@@ -699,8 +662,12 @@
                     <div id="blog-homepage" class="row">
                         <div class="col-sm-6">
                             <div class="post">
-                                <h4><a href="post.html">Fashion now</a></h4>
-                                <p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a>
+                                <h4>
+                                    <a href="post.html">Fashion now</a>
+                                </h4>
+                                <p class="author-category">By
+                                    <a href="#">John Slim</a> in
+                                    <a href="">Fashion and style</a>
                                 </p>
                                 <hr>
                                 <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
@@ -708,15 +675,20 @@
                                     libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
                                     leo.
                                 </p>
-                                <p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a>
+                                <p class="read-more">
+                                    <a href="post.html" class="btn btn-primary">Continue reading</a>
                                 </p>
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="post">
-                                <h4><a href="post.html">Who is who - example blog post</a></h4>
-                                <p class="author-category">By <a href="#">John Slim</a> in <a href="">About Minimal</a>
+                                <h4>
+                                    <a href="post.html">Who is who - example blog post</a>
+                                </h4>
+                                <p class="author-category">By
+                                    <a href="#">John Slim</a> in
+                                    <a href="">About Minimal</a>
                                 </p>
                                 <hr>
                                 <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
@@ -724,7 +696,8 @@
                                     libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
                                     leo.
                                 </p>
-                                <p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a>
+                                <p class="read-more">
+                                    <a href="post.html" class="btn btn-primary">Continue reading</a>
                                 </p>
                             </div>
 
@@ -751,13 +724,17 @@
                         <h4>Pages</h4>
 
                         <ul>
-                            <li><a href="text.html">About us</a>
+                            <li>
+                                <a href="text.html">About us</a>
                             </li>
-                            <li><a href="text.html">Terms and conditions</a>
+                            <li>
+                                <a href="text.html">Terms and conditions</a>
                             </li>
-                            <li><a href="faq.html">FAQ</a>
+                            <li>
+                                <a href="faq.html">FAQ</a>
                             </li>
-                            <li><a href="contact.html">Contact us</a>
+                            <li>
+                                <a href="contact.html">Contact us</a>
                             </li>
                         </ul>
 
@@ -766,9 +743,11 @@
                         <h4>User section</h4>
 
                         <ul>
-                            <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
                             </li>
-                            <li><a href="register.html">Regiter</a>
+                            <li>
+                                <a href="register.html">Regiter</a>
                             </li>
                         </ul>
 
@@ -784,23 +763,30 @@
                         <h5>Men</h5>
 
                         <ul>
-                            <li><a href="category.html">T-shirts</a>
+                            <li>
+                                <a href="category.html">T-shirts</a>
                             </li>
-                            <li><a href="category.html">Shirts</a>
+                            <li>
+                                <a href="category.html">Shirts</a>
                             </li>
-                            <li><a href="category.html">Accessories</a>
+                            <li>
+                                <a href="category.html">Accessories</a>
                             </li>
                         </ul>
 
                         <h5>Ladies</h5>
                         <ul>
-                            <li><a href="category.html">T-shirts</a>
+                            <li>
+                                <a href="category.html">T-shirts</a>
                             </li>
-                            <li><a href="category.html">Skirts</a>
+                            <li>
+                                <a href="category.html">Skirts</a>
                             </li>
-                            <li><a href="category.html">Pants</a>
+                            <li>
+                                <a href="category.html">Pants</a>
                             </li>
-                            <li><a href="category.html">Accessories</a>
+                            <li>
+                                <a href="category.html">Accessories</a>
                             </li>
                         </ul>
 
@@ -813,7 +799,8 @@
 
                         <h4>Where to find us</h4>
 
-                        <p><strong>Obaju Ltd.</strong>
+                        <p>
+                            <strong>Obaju Ltd.</strong>
                             <br>13/25 New Avenue
                             <br>New Heaven
                             <br>45Y 73J
@@ -844,9 +831,9 @@
 
                                 <span class="input-group-btn">
 
-			    <button class="btn btn-default" type="button">Subscribe!</button>
+                                    <button class="btn btn-default" type="button">Subscribe!</button>
 
-			</span>
+                                </span>
 
                             </div>
                             <!-- /input-group -->
@@ -857,11 +844,21 @@
                         <h4>Stay in touch</h4>
 
                         <p class="social">
-                            <a href="#" class="facebook external" data-animate-hover="shake"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="twitter external" data-animate-hover="shake"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="instagram external" data-animate-hover="shake"><i class="fa fa-instagram"></i></a>
-                            <a href="#" class="gplus external" data-animate-hover="shake"><i class="fa fa-google-plus"></i></a>
-                            <a href="#" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>
+                            <a href="#" class="facebook external" data-animate-hover="shake">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a href="#" class="twitter external" data-animate-hover="shake">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#" class="instagram external" data-animate-hover="shake">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                            <a href="#" class="gplus external" data-animate-hover="shake">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                            <a href="#" class="email external" data-animate-hover="shake">
+                                <i class="fa fa-envelope"></i>
+                            </a>
                         </p>
 
 
@@ -890,7 +887,9 @@
 
                 </div>
                 <div class="col-md-6">
-                    <p class="pull-right">Template by <a href="https://bootstrapious.com/e-commerce-templates">Bootstrapious</a> & <a href="https://fity.cz">Fity</a>
+                    <p class="pull-right">Template by
+                        <a href="https://bootstrapious.com/e-commerce-templates">Bootstrapious</a> &
+                        <a href="https://fity.cz">Fity</a>
                         <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
                     </p>
                 </div>
