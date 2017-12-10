@@ -19,6 +19,8 @@ import { DeliveryComponent } from './delivery/index';
 import { PaymentComponent } from './payment/index';
 import { ContactComponent } from './contact/index';
 import { FaqComponent } from './faq/index';
+import { MentshirtsComponent } from './mentshirts/index';
+import { WomentshirtsComponent } from './womentshirts/index';
 
 @NgModule({
     imports: [
@@ -38,7 +40,9 @@ import { FaqComponent } from './faq/index';
         DeliveryComponent,
         PaymentComponent,
         ContactComponent,
-        FaqComponent
+        FaqComponent,
+        MentshirtsComponent,
+        WomentshirtsComponent
     ],
     providers: [
         customHttpProvider,

@@ -10,6 +10,8 @@ import { PaymentComponent } from './payment/index';
 import { ContactComponent } from './contact/index';
 import { FaqComponent } from './faq/index';
 import { AuthGuard } from './_guards/index';
+import { MentshirtsComponent } from './mentshirts/index';
+import { WomentshirtsComponent } from './womentshirts/index';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -21,6 +23,8 @@ const appRoutes: Routes = [
     { path: 'payment', component: PaymentComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'faq', component: FaqComponent },
+    { path: 'mentshirts', component: MentshirtsComponent},
+    { path: 'womentshirts', component: WomentshirtsComponent },
     
     // Neha~ Start of changes 
     { path: 'home', component: HomeComponent},
