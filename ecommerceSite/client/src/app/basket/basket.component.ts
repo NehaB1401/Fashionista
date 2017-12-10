@@ -28,6 +28,7 @@ export class BasketComponent implements OnInit {
   appState = 'default';
   op; 
   fp;
+  productName;
   
   
  
@@ -74,6 +75,22 @@ export class BasketComponent implements OnInit {
     totalPrice = totalPrice - ( (totalPrice * 0.10) );
     
     this.orderSummary();
+  }
+ 
+  cartObjectDelete(productName: string , user : User)
+  {   
+      alert(productName);
+      this.appState='edit';
+      
+     
+      this.userService.updateuser(productName , user)
+      .subscribe(
+          data => {
+               this.alertService.success('Product Deleted Successfully!!', true);
+          },
+          error => {
+             this.alertService.error(error);
+          });
   }
   
 }
