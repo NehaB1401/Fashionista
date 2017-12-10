@@ -5,8 +5,10 @@ var productService = require('services/product.service');
 
 // routes
 router.get('/', getAll);
+router.post('/create', create);
 router.put('/:_id', update);
 router.delete('/:_id', _delete);
+
 
 module.exports = router;
 
@@ -48,6 +50,17 @@ function update(req, res) {
 
 function _delete(req, res) {
     productService.delete(req.params._id)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+}
+
+function create(req, res) {
+    console.log("server reached");
+    productService.create(req.body)
         .then(function () {
             res.sendStatus(200);
         })
