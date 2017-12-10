@@ -26,7 +26,8 @@ export class BasketComponent implements OnInit {
   users: User[] = [];
   products : Product[] = [];
   appState = 'default';
-
+  op; 
+  fp;
   
   
  
@@ -57,15 +58,17 @@ export class BasketComponent implements OnInit {
     for(var i=0; i <userCartLength; i++ ){
         totalPrice=    totalPrice +  (this.currentUser.cart[i].productPrice * this.currentUser.cart[i].cartQuantity); 
     }
-    alert("final cart Price: " +totalPrice);
-
+    
+    this.fp = totalPrice;
   }
   orderSummary(){
     //display the order summary with shipping
       var orderPrice = 0;
       orderPrice = totalPrice + 10;
-      alert("Order Price :"+ orderPrice);
-  }
+      
+      this.op = orderPrice;
+    
+      }
   orderDiscount(){
    // calculate the discount 
     totalPrice = totalPrice - ( (totalPrice * 0.10) );
