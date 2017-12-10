@@ -20,11 +20,13 @@ export class UserService {
         return this.http.post('/users/register', user);
     }
 
-    update(products: Product , user : User ) {
-        // localStorage.setItem('cart', JSON.stringify(Product));
-        alert(user._id +"  user service.ts");
-        alert(products.productName +"  user service.ts");
+    update( products: Product , user : User ) {
+    
          return this.http.put('/users/test' ,{products : products , user : user});
+     }
+    updateuser( productName : string , user : User){
+         
+        return this.http.put('/users/updateuser', {productName :productName , user: user});        
      }
 
     delete(_id: string) {

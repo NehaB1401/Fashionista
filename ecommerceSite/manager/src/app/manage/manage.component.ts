@@ -27,6 +27,7 @@ export class ManageComponent implements OnInit {
   totalAvailability = '';  //text
   oldTotalAvailability = ''; //oldText
   file : any = null;
+  image: string;
 
   constructor( private productService: ProductService,
     private router: Router) 
@@ -48,7 +49,10 @@ showProducts() {
 
 addProduct(){
  
-  alert("Added Successfully");
+  var imageName = (<HTMLInputElement> document.getElementById('image')).value;
+  var test = imageName.split("\\",3);
+  this.model.image = test[2];
+  alert(this.model.image);
   this.productService.create(this.model)
   .subscribe(
       data => {
@@ -76,6 +80,8 @@ editProduct(product : Product)
   this.model.type = product.type;
   this.model.totalAvailability = product.totalAvailability;
 }
+
+
 
 updateProduct(){
   

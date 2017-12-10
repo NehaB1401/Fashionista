@@ -18,7 +18,6 @@ export class ProductService {
     }
 
     create(product: Product) {
-        
         return this.http.post('/products/create', product);
     }
 
