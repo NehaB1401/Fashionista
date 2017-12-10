@@ -42,18 +42,34 @@
                         <tr>
                             <th>Product Id</th>
                             <th>Product Name</th>
-                            <th>Type</th>
+                            <th> Geo Type</th>
+                            <th> Gen Type</th>
+                            <th> Wear Type</th>
+                            <th> Category Type</th>
+                            <th> Rating</th>
+                            <th> Popularity</th>
                             <th>Availiblity</th>
-                            <th>Picture</th>
+                            <th>Price</th>
+                            <th> Discount</th>
+                            <th> Front Picture</th>
+                            <th>Back Picture</th>
                             <th>Delete</th>   
                         </tr>
 
                          <tr *ngFor="let product of products" >
                             <td span (click)="editProduct(product)">{{product.productId}}</td>
                             <td span  (click)="editProduct(product)">{{product.productName}}</td>
-                            <td span  (click)="editProduct(product)">{{product.type}}</td>
+                            <td span  (click)="editProduct(product)">{{product.geoType}}</td>
+                            <td span  (click)="editProduct(product)">{{product.genType}}</td>
+                            <td span  (click)="editProduct(product)">{{product.wearType}}</td>
+                            <td span  (click)="editProduct(product)">{{product.categoryType}}</td>
+                            <td span  (click)="editProduct(product)">{{product.rating}}</td>
+                            <td span  (click)="editProduct(product)">{{product.popularity}}</td>
                             <td span  (click)="editProduct(product)">{{product.totalAvailability}}</td>
-                            <td>{{product.image}}</td>
+                            <td span  (click)="editProduct(product)">{{product.price}}</td>
+                            <td span  (click)="editProduct(product)">{{product.discount}}</td>
+                            <td>{{product.frontImage}}</td>
+                            <td>{{product.backImage}}</td>
                             <td span  (click)="deleteProduct(product._id)"><i class="fa fa-trash"></i></td>
                          </tr>
                        
@@ -75,10 +91,40 @@
                 <input type="text" class="form-control" name="productName" [(ngModel)]="model.productName" #firstName="ngModel" required />
             </div>
 
-            <!-- Product Type Display -->
+            <!-- Product Desc Display -->
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
-                <label for="type">Type</label>
-                <input type="text" class="form-control" name="type" [(ngModel)]="model.type" #firstName="ngModel" required />
+                <label for="productDesc">Product Desc</label>
+                <input type="text" class="form-control" name="productDesc" [(ngModel)]="model.productDesc" #firstName="ngModel" required />
+            </div>
+
+            <!-- Product Geo Type Display -->
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+                <label for="geoType">Geo Type</label>
+                <input type="text" class="form-control" name="geoType" [(ngModel)]="model.geoType" #firstName="ngModel" required />
+            </div>
+
+             <!-- Product Gender Type Display -->
+             <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+                <label for="genType">Gender Type</label>
+                <input type="text" class="form-control" name="genType" [(ngModel)]="model.genType" #firstName="ngModel" required />
+            </div>
+
+            <!-- Product Category Type Display -->
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+                <label for="wearType">Wear Type</label>
+                <input type="text" class="form-control" name="wearType" [(ngModel)]="model.wearType" #firstName="ngModel" required />
+            </div>
+
+            <!-- Product Category Type Display -->
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+                <label for="categoryType">Category Type</label>
+                <input type="text" class="form-control" name="categoryType" [(ngModel)]="model.categoryType" #firstName="ngModel" required />
+            </div>
+
+            <!-- Product Rating Display -->
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+                <label for="rating">Rating</label>
+                <input type="number" class="form-control" name="rating" [(ngModel)]="model.rating" #lastName="ngModel" required />     
             </div>
                 
             <!-- Product Availability Display -->
@@ -87,11 +133,36 @@
                 <input type="number" class="form-control" name="totalAvailability" [(ngModel)]="model.totalAvailability" #lastName="ngModel" required />     
             </div>
 
-            <!-- Picture Display -->
+            <!-- Product Popularity Display -->
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
-                <label for="image">Image</label>
-                <input type="file" id="image" name="image"/>
+                <label for="popularity">Geo Type</label>
+                <input type="text" class="form-control" name="popularity" [(ngModel)]="model.popularity" #firstName="ngModel" required />
             </div>
+
+            <!-- Product Price Display -->
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" name="price" [(ngModel)]="model.price" #lastName="ngModel" required />     
+            </div>
+
+            <!-- Product Discount Display -->
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+                <label for="discount">Discount</label>
+                <input type="number" class="form-control" name="discount" [(ngModel)]="model.discount" #lastName="ngModel" required />     
+            </div>
+
+            <!-- Front Picture Display -->
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+                <label for="frontImage">FImage</label>
+                <input type="file" id="frontImage" name="frontImage"/>
+            </div>
+
+             <!-- Back Picture Display -->
+             <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+                <label for="backImage">BImage</label>
+                <input type="file" id="backImage" name="backImage"/>
+            </div>
+
             <div class="form-group">
                 <button [disabled]="loading" (click)="addProduct(model)" class="btn btn-success">Add Product</button>
                 <button [disabled]="loading" (click)="updateProduct(model)" class="btn btn-success">Update Product</button>            

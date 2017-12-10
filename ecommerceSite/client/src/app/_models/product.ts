@@ -2,6 +2,7 @@ export class Product {
     _id: string;
     productId: string;
     productName: string;
+    productDesc: string;
     geoType: string;
     genType: string;
     wearType: string;
