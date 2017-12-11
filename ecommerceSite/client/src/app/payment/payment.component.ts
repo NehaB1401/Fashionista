@@ -1,33 +1,39 @@
-import { Component, OnInit, Input ,Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DataService } from '../_services/data.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
   moduleId: module.id,
   templateUrl: 'payment.component.html',
   styleUrls: [
-      '../css/style.default.css',
-      '../css/font-awesome.css',
-      '../css/animate.min.css',
-      '../css/owl.theme.css',
-      '../css/custom.css'
+    '../css/style.default.css',
+    '../css/font-awesome.css',
+    '../css/animate.min.css',
+    '../css/owl.theme.css',
+    '../css/custom.css'
   ]
-  
-  
+
+
 })
 export class PaymentComponent implements OnInit {
-  @Input('orderPrice') abc : number;
+
+  @Input() myData;
+  neha;
+  price;
+  returnUrl: string;
+
+  constructor(
+    private dataService: DataService, 
+    private router: Router,
   
-  test;
-  constructor() { }
+    private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    alert(this.abc);
-  //  this.onPayment(20);
+    this.price = this.route.snapshot.paramMap.get('id');
   }
-  onPayment(paymentPrice : number){
-      this.test = paymentPrice;
-      alert("neha you are wrong!!")
-      alert(this.test);          
-  }
+  
+
 
 }

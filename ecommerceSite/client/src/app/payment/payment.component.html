@@ -45,10 +45,7 @@
 </head>
 
 <body>
-    <h1>HI</h1>
-    {{test}}
-    (onPayment) = onPayment($event);
-    {{abc}}
+   <h1> The price is {{price}} </h1>
     <!-- *** TOPBAR ***
  _________________________________________________________ -->
     <div id="top">
@@ -516,7 +513,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Order subtotal</td>
-                                        <th>$446.00</th>
+                                        <th>{{price}}</th>
                                     </tr>
                                     <tr>
                                         <td>Shipping and handling</td>
@@ -528,7 +525,7 @@
                                     </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$456.00</th>
+                                        <th>{{price}}</th>
                                     </tr>
                                 </tbody>
                             </table>
