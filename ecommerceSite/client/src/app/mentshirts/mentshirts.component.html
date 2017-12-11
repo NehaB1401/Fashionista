@@ -64,7 +64,7 @@
 <body>
     <!-- *** TOPBAR ***
  _________________________________________________________ -->
- <div id="top">
+    <div id="top">
         <div class="container">
             <div class="col-md-6 offer" data-animate="fadeInDown">
                 <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>
@@ -156,16 +156,16 @@
                                             <div class="message-box">
                                                 <div>
                                                     <ul id="messages" class="message">
-                                                            <div class="secondSubChild">
-                                                                    <div class=user-alert>
-                                                                        <div id="newUserID" *ngIf="newUser">
-                                                                            {{newUserName}} joined Chat!
-                                                                        </div>
-                                                                        <div id="leftUserID" *ngIf="exitedUser">
-                                                                            {{exitedUserName}} left the Chat!
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- <div class="caption">
+                                                        <div class="secondSubChild">
+                                                            <div class=user-alert>
+                                                                <div id="newUserID" *ngIf="newUser">
+                                                                    {{newUserName}} joined Chat!
+                                                                </div>
+                                                                <div id="leftUserID" *ngIf="exitedUser">
+                                                                    {{exitedUserName}} left the Chat!
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="caption">
                                                                         <h2>Connected Users</h2>
                                                                     </div>
                                                                     <div class="user-list">
@@ -182,7 +182,7 @@
                                                                             </li>
                                                                         </ul>
                                                                     </div> -->
-                                                                </div>
+                                                        </div>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -190,34 +190,34 @@
                                     </div>
                                     <div class="header2">
                                         <div class="userborder">
-                                    <div class="caption" >
-                                            <div class="msg">Users Online</div>
-                                        </div>
-                                        <div class="user-list">
-                                            <ul class="user-list-ul">
-                                                <li *ngFor="let name of clientsNameList" class="user-list__item">
-                                                    <div>
-                                                        <input class="check-box" type="checkbox" [checked]="true" disabled>
-                                                    </div>
-                                                    <div class="user-list__content">
-                                                        <div class="user-list__name">
-                                                            <div class="text text_size_m">{{name}}</div>
+                                            <div class="caption">
+                                                <div class="msg">Users Online</div>
+                                            </div>
+                                            <div class="user-list">
+                                                <ul class="user-list-ul">
+                                                    <li *ngFor="let name of clientsNameList" class="user-list__item">
+                                                        <div>
+                                                            <input class="check-box" type="checkbox" [checked]="true" disabled>
                                                         </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                                        <div class="user-list__content">
+                                                            <div class="user-list__name">
+                                                                <div class="text text_size_m">{{name}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="msgborder">
+                                        <div class="msgborder">
                                             <div class="enter-message">
-                                                    <input id="message-boxID" #messagebox placeholder="Type your message here" (keyup)="sendMessageOnEnter($event, messagebox)"
-                                                        (keydown)="update()" autocomplete="off" value="" autofocus required>
-                                                    <button class="send" (click)="sendMessage(messagebox)">Send</button>
-                                                </div>
-                                    </div>
+                                                <input id="message-boxID" #messagebox placeholder="Type your message here" (keyup)="sendMessageOnEnter($event, messagebox)"
+                                                    (keydown)="update()" autocomplete="off" value="" autofocus required>
+                                                <button class="send" (click)="sendMessage(messagebox)">Send</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -446,7 +446,7 @@
                                                     <a href="customer-wishlist.html">Wishlist</a>
                                                 </li>
                                             </ul>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.yamm-content -->
@@ -604,7 +604,9 @@
                                                 <strong>Show</strong>
                                                 <a (click)="update12Products();" [routerLink]="['/mentshirts']" class="btn btn-default btn-sm btn-primary">12</a>
                                                 <a (click)="update9Products();" class="btn btn-default btn-sm">9</a>
-                                                <a  (click)="updateallProducts();"[routerLink]="['/mentshirts']" class="btn btn-default btn-sm">All</a> products
+                                                <a (click)="updateallProducts();" [routerLink]="['/mentshirts']" class="btn btn-default btn-sm">All</a> products
+                                                 
+                                                 {{check}}
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
@@ -626,27 +628,27 @@
                     <div class="row products">
                         <!-- loadPageOne(); -->
                         <div *ngFor="let product of products let i = index" [attr.data-index]="i">
-                        <!-- <div *ngFor="let number of [0,1,2,3,4]"> -->
-                        <!-- <div ng-repeat="product in products"> -->
-                                
+                            <!-- <div *ngFor="let number of [0,1,2,3,4]"> -->
+                            <!-- <div ng-repeat="product in products"> -->
+
                             <!-- <div *ngIf= "i < 12"> -->
                             <div class="col-md-4 col-sm-6">
 
                                 <div class="product">
 
-                              
+
                                     <div *ngIf="product.genType == 'men'">
                                         <div *ngIf="product.wearType == 'casuals'">
                                             <div *ngIf="product.categoryType == 'tshirts'">
                                                 <div class="flip-container">
                                                     <div class="flipper">
                                                         <div class="front">
-                                                            <a href="detail.html">
+                                                            <a (click)="productDetails();" [routerLink]="['/product-details']">
                                                                 <img src="assets/img/{{product.frontImage}}" alt="" class="img-responsive">
                                                             </a>
                                                         </div>
                                                         <div class="back">
-                                                            <a href="detail.html">
+                                                            <a (click)="productDetails();" [routerLink]="['/product-details']">
                                                                 <img src="assets/img/{{product.backImage}}" alt="" class="img-responsive">
                                                             </a>
                                                         </div>
@@ -669,7 +671,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
                                 <!-- </div> -->
                             </div>
                         </div>
@@ -753,7 +755,7 @@
                     <div class="pages">
 
                         <p class="loadMore">
-                            <a (click)="updateallProducts();"[routerLink]="['/mentshirts']" class="btn btn-primary btn-lg">
+                            <a (click)="updateallProducts();" [routerLink]="['/mentshirts']" class="btn btn-primary btn-lg">
                                 <i class="fa fa-chevron-down"></i> Load more</a>
                         </p>
 
@@ -762,10 +764,10 @@
                                 <a href="#">&laquo;</a>
                             </li>
                             <li class="active">
-                                <a (click)="update12Products();"[routerLink]="['/mentshirts']">1</a>
+                                <a (click)="update12Products();" [routerLink]="['/mentshirts']">1</a>
                             </li>
                             <li>
-                                <a (click)="update9Products();"[routerLink]="['/mentshirts']">2</a>
+                                <a (click)="update9Products();" [routerLink]="['/mentshirts']">2</a>
                             </li>
                             <li>
                                 <a href="#">&raquo;</a>

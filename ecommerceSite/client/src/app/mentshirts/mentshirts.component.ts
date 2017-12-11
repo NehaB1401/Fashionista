@@ -47,6 +47,7 @@ export class MentshirtsComponent {
  clientsNameList: number[];
  message: string;
  msgCount: number = 0;
+ check;
 
   constructor(
 
@@ -256,7 +257,9 @@ export class MentshirtsComponent {
              this.alertService.error(error);
           });
   }
-
+  onVoted(passValue: number) {
+    this.check = passValue;
+  }
 
 
 }
