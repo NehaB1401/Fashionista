@@ -50,7 +50,7 @@ import { WomentshirtsComponent } from './womentshirts/index';
         AlertService,
         AuthenticationService,
         UserService, 
-        ProductService,
+        ProductService
         
     ],
     bootstrap: [AppComponent]
