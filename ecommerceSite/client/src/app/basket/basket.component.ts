@@ -5,7 +5,6 @@ import { User } from '../_models/index';
 import { AlertService, UserService } from '../_services/index';
 import { Product } from '../_models/index';
 import { ProductService } from '../_services/index';
-import { DataService } from '../_services/data.service';
 
 var totalPrice =0;
 @Component({
@@ -36,8 +35,7 @@ export class BasketComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService, private productService: ProductService,
-    private router: Router, private alertService: AlertService,
-    private dataService: DataService
+    private router: Router, private alertService: AlertService
     ) 
    {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));

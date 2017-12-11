@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DataService } from '../_services/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -24,7 +23,6 @@ export class PaymentComponent implements OnInit {
   returnUrl: string;
 
   constructor(
-    private dataService: DataService, 
     private router: Router,
   
     private route: ActivatedRoute) {

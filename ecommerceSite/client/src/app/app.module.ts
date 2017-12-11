@@ -10,7 +10,6 @@ import { customHttpProvider } from './_helpers/index';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService, ProductService } from './_services/index';
-import {DataService} from './_services/data.service';
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
@@ -51,8 +50,7 @@ import { WomentshirtsComponent } from './womentshirts/index';
         AlertService,
         AuthenticationService,
         UserService, 
-        ProductService,
-        DataService
+        ProductService
         
     ],
     bootstrap: [AppComponent]
