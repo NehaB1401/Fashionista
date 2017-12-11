@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { User } from '../_models/index';
@@ -8,6 +8,7 @@ import { ProductService } from '../_services/index';
 
 var totalPrice =0;
 @Component({
+  selector: 'app-basket',
   moduleId: module.id,
   templateUrl: 'basket.component.html',
   styleUrls: [
@@ -31,15 +32,13 @@ export class BasketComponent implements OnInit {
   productQuant;
   q;
   
-
-
-
   constructor(
     private route: ActivatedRoute,
     private userService: UserService, private productService: ProductService,
     private router: Router, private alertService: AlertService
-  ) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    ) 
+   {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
    }
 
   ngOnInit() {
@@ -49,17 +48,16 @@ export class BasketComponent implements OnInit {
     this.orderSummary();
   }
    loadAllUsers() {
-    
     //load all users and their cart items
     this.userService.getAll().subscribe(users => { this.users = users; });
 }
   finalPrice(){
-    var userCartLength= this.currentUser.cart.length;
     
+    alert(JSON.stringify(this.currentUser));
+    var userCartLength= this.currentUser.cart.length;
     //calculate the total price of the items in users cart
-
     for(var i=0; i <userCartLength; i++ ){
-        totalPrice=    totalPrice +  (this.currentUser.cart[i].productPrice * this.q); 
+        totalPrice=    totalPrice +  (this.currentUser.cart[i].productPrice); 
     }
     this.fp = totalPrice;
     
@@ -74,9 +72,7 @@ export class BasketComponent implements OnInit {
   }
   orderDiscount(){
    // calculate the discount 
-   //alert(this.model.item.cartQuantity);
     totalPrice = totalPrice - ( (totalPrice * 0.10) );
-    
     this.orderSummary();
     alert(this.productQuant);
   }
@@ -95,17 +91,5 @@ export class BasketComponent implements OnInit {
              this.alertService.error(error);
           });
   }
-    
-    loadQuant(q){
-    
-    this.productQuant = q;
-    }
-    updateBasket(){
-       alert(this.productQuant);
-        //alert(this.productQuant);
-    }
 
-
-
-  
 }

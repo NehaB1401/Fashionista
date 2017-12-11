@@ -20,7 +20,7 @@ const appRoutes: Routes = [
     { path: 'basket', component: BasketComponent },
     { path: 'checkoutaddress', component: CheckoutaddressComponent },
     { path: 'delivery', component: DeliveryComponent },
-    { path: 'payment', component: PaymentComponent },
+    { path: 'payment/:id', component: PaymentComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'faq', component: FaqComponent },
     { path: 'mentshirts', component: MentshirtsComponent},

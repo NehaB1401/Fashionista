@@ -132,22 +132,15 @@ function update(productsParam , userParam ) {
             db.users.findOne(
                 { username: userParam.username },
                 function (err, user) {
-                    if (err) deferred.reject(err.name + ': ' + err.message);
+                    updateUser();
 
-                    if (user) {
-                        // username already exists
-                        deferred.reject('Username "' + req.body.username + '" is already taken')
-                    } else {
-                        updateUser();
-                    }
+                    
                 });
-        } else {
-            updateUser();
-        }
+        } 
     });
 
     function updateUser() {
-       // alert("update user serveic.js"+users.cart.productName)
+      
         // fields to update
         var set = {
             
@@ -212,14 +205,14 @@ function _delete(productName , userParam ) {
     });
 
     function removeObject() {
-       console.log("removeObject");
+       
         var set = {
             
             username: userParam.username    
         };
        var pull = {
            cart :{
-               productName : productName
+              
            }
        }
 
@@ -234,7 +227,7 @@ function _delete(productName , userParam ) {
         db.users.update(
            { _id: mongo.helper.toObjectID(userParam._id) },
            
-          { $set : set,  $pull : pull},
+          { $set : set,  $set : pull},
            
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
