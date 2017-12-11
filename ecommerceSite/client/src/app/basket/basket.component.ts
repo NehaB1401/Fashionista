@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { User } from '../_models/index';
@@ -31,8 +31,8 @@ export class BasketComponent implements OnInit {
   productQuant;
   q;
   
-
-
+  paymentOrderPrice :number = 10;
+  @Output() onPayment = new EventEmitter<number>();
 
   constructor(
     private route: ActivatedRoute,
@@ -59,7 +59,7 @@ export class BasketComponent implements OnInit {
     //calculate the total price of the items in users cart
 
     for(var i=0; i <userCartLength; i++ ){
-        totalPrice=    totalPrice +  (this.currentUser.cart[i].productPrice * this.q); 
+        totalPrice=    totalPrice +  (this.currentUser.cart[i].productPrice); 
     }
     this.fp = totalPrice;
     
@@ -103,6 +103,11 @@ export class BasketComponent implements OnInit {
     updateBasket(){
        alert(this.productQuant);
         //alert(this.productQuant);
+    }
+    proPayment(paymentPrice : number){
+          alert(paymentPrice);
+          this.onPayment.emit(paymentPrice);
+
     }
 
 
