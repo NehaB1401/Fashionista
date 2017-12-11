@@ -34,14 +34,21 @@
                                                   
                                                   <td><a href="#">{{item.productName}}</a>
                                                   </td>
-                                                  <td></td>
                                                   <td>
-                                                      {{item.cartQuantity}}
+                                                      
+                                                  </td>
+                                                  <td>
+                                                    
+                                                        <!-- {{loadQuant() }} -->
+                                                        <input type="number" id="myNumber" value="1" [(ngModel)] = "productQuant">
                                                   </td>
                                                   <td>${{item.productPrice}}</td>
                                                   <td>$0.00</td>
                                                   <td>${{item.productPrice}}</td>
                                                   <td><a (click)="cartObjectDelete(item.productName , currentUser)"><i class="fa fa-trash-o"></i></a>
+                                                  </td>
+                                                  <td>
+                                                       <button class="btn btn-default" (click) = "updateBasket(productQuant)"><i class="fa fa-refresh"></i> Update basket</button>
                                                   </td>
                                               </tr>
                                               
@@ -62,8 +69,7 @@
                                           <a href="category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
                                       </div>
                                       <div class="pull-right">
-                                          <button class="btn btn-default"><i class="fa fa-refresh"></i> Update basket</button>
-                                          <button type="submit" class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i>
+                                          <button type="submit" class="btn btn-primary" [routerLink]="['/payment']" >Proceed to checkout <i class="fa fa-chevron-right"></i>
                                           </button>
                                       </div>
                                   </div>
