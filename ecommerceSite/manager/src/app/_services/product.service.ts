@@ -22,7 +22,7 @@ export class ProductService {
     }
 
     update(product: Product) {
-        alert(product._id);
+    
         return this.http.put('/products/' + product._id, product);
     }
 

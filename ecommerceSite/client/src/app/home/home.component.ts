@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
     clientsNameList: number[];
     message: string;
     msgCount: number = 0;
+    socket: any;
 
 
     constructor(private userService: UserService,
@@ -67,7 +68,7 @@ export class HomeComponent implements OnInit {
         this.loadAllUsers();
         
         // reset login status
-        this.authenticationService.logout();
+        //this.authenticationService.logout();
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -109,6 +110,58 @@ export class HomeComponent implements OnInit {
 
     }
 
+    login() {
+        // Get the modal
+        var modal = document.getElementById('login-modal');
+        modal.style.display = "none";
+        this.loading = true;
+        this.authenticationService.login(this.model.username, this.model.password)
+            .subscribe(
+                data => {
+                    this.router.navigate([this.returnUrl]);
+                    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+    }
+
+    sendMessage(data) {
+        this.resFlag = true;
+        let reference = this;
+        this.socket.emit("chatMessageToSocketServer", data.value, function(respMsg, username){
+            reference.sentMessageUsername = username;
+            reference.response = respMsg;
+        });
+        $("#message-boxID").val(" ");
+    }
+  
+    sendMessageOnEnter($event, messagebox) {
+        if ($event.which === 13) { // ENTER_KEY
+            this.sendMessage(messagebox);
+        }
+    }
+  
+    update() {
+        this.resFlag = false;
+        this.newUser = false;
+        this.exitedUser = false;
+    }
+    addToCart(product: Product , user : User)
+    {   
+        this.appState='edit';
+       
+       // this.currentUser.cart.push[cartDetails];
+        this.userService.update(product , user)
+        .subscribe(
+            data => {
+                 this.alertService.success('Added to cart successfully', true);
+            },
+            error => {
+               this.alertService.error(error);
+            });
+    }
 
     chat() 
     {
@@ -138,9 +191,10 @@ export class HomeComponent implements OnInit {
         if(null != this.currentUser)
         {
             chatusername = this.currentUser.username;
+            this.socket = io.connect("http://localhost:3000?userName="+chatusername);
         }
-        var socket = io.connect("http://localhost:3000?userName="+chatusername);
-        socket.on("broadcastToAll_chatMessage", function(resObj) {            
+        
+        this.socket.on("broadcastToAll_chatMessage", function(resObj) {            
             reference.msgCount++;
             if (reference.sentMessageUsername !== resObj.name) {
                 resObj.name = resObj.name + ": ";
@@ -156,22 +210,22 @@ export class HomeComponent implements OnInit {
                 $("#messages").append($("<li data-index=" + reference.msgCount + ">"));
                 $("li[data-index=" + reference.msgCount + "]").append($("<div class='right-msg' data-index=" + reference.msgCount + ">"));
                 $("div[data-index=" + reference.msgCount + "]").append($("<span class='msg'>").text(resObj.msg));
-                    $("#messages").append($("<br>"));
+                $("#messages").append($("<br>"));
                 reference.sentMessageUsername = null;
             }
         });
     
-        socket.on("updateSocketList", function(list){
+        this.socket.on("updateSocketList", function(list){
             reference.clientsNameList = list;
         });
     
-        socket.on("addUserToSocketList", function(username){
+        this.socket.on("addUserToSocketList", function(username){
             reference.exitedUser = false;
             reference.newUser = true;
             reference.newUserName = username;
         });
     
-        socket.on("removeUserFromSocketList", function(username){
+        this.socket.on("removeUserFromSocketList", function(username){
             reference.newUser = false;
             reference.exitedUser = true;
             reference.exitedUserName = username;
@@ -179,59 +233,4 @@ export class HomeComponent implements OnInit {
 
     }
 
-    login() {
-        // Get the modal
-        var modal = document.getElementById('login-modal');
-        modal.style.display = "none";
-        this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
-            .subscribe(
-                data => {
-                    this.router.navigate([this.returnUrl]);
-                    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
-    }
-
-    sendMessage(data) {
-        this.resFlag = true;
-        let reference = this;
-        var socket = io.connect("http://localhost:3000?userName="+this.currentUser.username);
-        socket.emit("chatMessageToSocketServer", data.value, function(respMsg, username){
-            reference.sentMessageUsername = username;
-            reference.response = respMsg;
-        });
-        $("#message-boxID").val(" ");
-    }
-  
-    sendMessageOnEnter($event, messagebox) {
-        if ($event.which === 13) { // ENTER_KEY
-            this.sendMessage(messagebox);
-        }
-    }
-  
-    update() {
-        this.resFlag = false;
-        this.newUser = false;
-        this.exitedUser = false;
-    }
-    addToCart(product: Product , user : User)
-    {   
-       
-        this.appState='edit';
-        
-       
-       // this.currentUser.cart.push[cartDetails];
-        this.userService.update(product , user)
-        .subscribe(
-            data => {
-                 this.alertService.success('Added to cart successfully', true);
-            },
-            error => {
-               this.alertService.error(error);
-            });
-    }
 }
