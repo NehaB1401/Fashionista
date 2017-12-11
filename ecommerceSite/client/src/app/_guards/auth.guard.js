@@ -18,13 +18,13 @@ var AuthGuard = /** @class */ (function () {
     AuthGuard.prototype.canActivate = function (route, state) {
         if (localStorage.getItem('currentUser')) {
             // logged in so return true
-            alert('logged in');
+            
             return true;
         }
         // not logged in so redirect to login page with the return url
         // Neha~ Start of changes 
         //this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-        alert('not logged in');
+        
         this.router.navigate(['/home'], { queryParams: { returnUrl: state.url } });
         // Neha~ End of changes
         return false;
