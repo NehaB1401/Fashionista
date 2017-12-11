@@ -28,10 +28,12 @@ export class BasketComponent implements OnInit {
   appState = 'default';
   op; // ordr price with shipping
   fp; //final price of component
+  productQuant;
+  q;
+  
 
-  
-  
- 
+
+
   constructor(
     private route: ActivatedRoute,
     private userService: UserService, private productService: ProductService,
@@ -57,7 +59,7 @@ export class BasketComponent implements OnInit {
     //calculate the total price of the items in users cart
 
     for(var i=0; i <userCartLength; i++ ){
-        totalPrice=    totalPrice +  (this.currentUser.cart[i].productPrice * this.currentUser.cart[i].cartQuantity); 
+        totalPrice=    totalPrice +  (this.currentUser.cart[i].productPrice * this.q); 
     }
     this.fp = totalPrice;
     
@@ -72,9 +74,11 @@ export class BasketComponent implements OnInit {
   }
   orderDiscount(){
    // calculate the discount 
+   //alert(this.model.item.cartQuantity);
     totalPrice = totalPrice - ( (totalPrice * 0.10) );
     
     this.orderSummary();
+    alert(this.productQuant);
   }
   cartObjectDelete(productName: string , user : User)
   {        
@@ -91,5 +95,17 @@ export class BasketComponent implements OnInit {
              this.alertService.error(error);
           });
   }
+    
+    loadQuant(q){
+    
+    this.productQuant = q;
+    }
+    updateBasket(){
+       alert(this.productQuant);
+        //alert(this.productQuant);
+    }
+
+
+
   
 }
