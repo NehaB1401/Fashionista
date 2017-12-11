@@ -5,7 +5,8 @@
     firstName: string;
     lastName: string;
     dob: Date;
-    cart: [{
+    cartTotalPrice : number;
+    cart:[ {
         productId : string;
         productName : string;
         cartQuantity : number;

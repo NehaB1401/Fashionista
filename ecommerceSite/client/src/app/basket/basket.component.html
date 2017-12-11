@@ -67,7 +67,7 @@
                                           <a href="category.html" class="btn btn-default" [routerLink]="['/home']"><i class="fa fa-chevron-left"></i> Continue shopping</a>
                                       </div>
                                       <div class="pull-right">
-                                          <button type="submit" class="btn btn-primary" (click)= "proPayment(10)" [routerLink]="['/payment']"  >Proceed to checkout <i class="fa fa-chevron-right"></i>
+                                          <button type="submit" class="btn btn-primary" (click)= "finalCartPayment(currentUser)" [routerLink]="['/payment']"  >Proceed to checkout <i class="fa fa-chevron-right"></i>
                                           </button>
                                       </div>
                                   </div>
@@ -125,6 +125,7 @@
                     <button class="btn btn-primary" type="button" (click)="orderDiscount()"><i class="fa fa-gift"></i></button>
           
                       </span>
+                      <button (click)="finalPaymentCartDelete(currentUser)">Test</button>
                                       </div>
                                       <!-- /input-group -->
                                   

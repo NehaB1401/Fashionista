@@ -11,6 +11,8 @@ router.get('/current', getCurrent);
 router.put('/test', update);
 router.delete('/:_id', _delete);
 router.put('/updateuser', updateuser);
+router.put('/finalUpdate', updateFinalCart);
+router.put('/finalPrice', finalPrice);
 
 module.exports = router;
 
@@ -66,7 +68,7 @@ function getCurrent(req, res) {
 
 function update(req, res) {
     console.log("Controller");
-    console.log( req.body.user._id);
+    
     userService.update(req.body.products , req.body.user)
         .then(function () {
             res.sendStatus(200);
@@ -77,8 +79,9 @@ function update(req, res) {
 }
 
 function updateuser(req, res) {
-        console.log("server controller");
-        console.log(req.body.productName + "" + JSON.stringify(req.body.user));
+        
+        console.log("its not me!!");
+        console.log(req.body.user._id);
     userService.updateUser(req.body.productName , req.body.user)
         .then(function () {
             res.sendStatus(200);
@@ -86,6 +89,18 @@ function updateuser(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
+}
+
+function updateFinalCart(req, res) {
+    console.log("its  me controller!!");
+    console.log( req.body.users._id + "Controller");
+    userService.updateUserFinal( req.body.users)
+    .then(function () {
+        res.sendStatus(200);
+    })
+    .catch(function (err) {
+        res.status(400).send(err);
+    });
 }
 
 function _delete(req, res) {
@@ -96,4 +111,16 @@ function _delete(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
+}
+function finalPrice(req, res) {
+    
+    console.log("its not me!!");
+    console.log(req.body.user._id);
+userService.finalPrices(req.body.user , req.body.op)
+    .then(function () {
+        res.sendStatus(200);
+    })
+    .catch(function (err) {
+        res.status(400).send(err);
+    });
 }

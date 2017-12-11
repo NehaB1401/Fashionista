@@ -21,7 +21,7 @@ export class PaymentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    alert(this.abc);
+    //alert(this.abc);
   //  this.onPayment(20);
   }
   onPayment(paymentPrice : number){

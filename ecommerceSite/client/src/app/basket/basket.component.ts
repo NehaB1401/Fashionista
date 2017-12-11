@@ -28,8 +28,7 @@ export class BasketComponent implements OnInit {
   appState = 'default';
   op; // ordr price with shipping
   fp; //final price of component
-  productQuant;
-  q;
+ 
   
   paymentOrderPrice :number = 10;
   @Output() onPayment = new EventEmitter<number>();
@@ -62,6 +61,7 @@ export class BasketComponent implements OnInit {
         totalPrice=    totalPrice +  (this.currentUser.cart[i].productPrice); 
     }
     this.fp = totalPrice;
+    alert(this.fp);
     
 
   }
@@ -78,7 +78,7 @@ export class BasketComponent implements OnInit {
     totalPrice = totalPrice - ( (totalPrice * 0.10) );
     
     this.orderSummary();
-    alert(this.productQuant);
+    
   }
   cartObjectDelete(productName: string , user : User)
   {        
@@ -96,20 +96,29 @@ export class BasketComponent implements OnInit {
           });
   }
     
-    loadQuant(q){
-    
-    this.productQuant = q;
-    }
-    updateBasket(){
-       alert(this.productQuant);
-        //alert(this.productQuant);
-    }
+  
     proPayment(paymentPrice : number){
           alert(paymentPrice);
           this.onPayment.emit(paymentPrice);
 
     }
+    finalPaymentCartDelete(users :User){
+      this.appState='edit';
+      alert("its me!! .ts  " + users.firstName);
+      this.userService.updatFinalCart(users)
+      .subscribe(
+          data => {
+               this.alertService.success('Transaction Done !!', true);
+               this.loadAllUsers();
+               
+          },
+         
+          error => {
+             this.alertService.error(error);
+          });
 
+    }
+    
 
 
   
