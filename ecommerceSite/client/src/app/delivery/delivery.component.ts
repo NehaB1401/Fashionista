@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { User } from '../_models/index';
 
 @Component({
   moduleId: module.id,
@@ -12,10 +14,18 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class DeliveryComponent implements OnInit {
+price;
+currentUser: User;
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
 
-  constructor() { }
+  ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+   }
 
   ngOnInit() {
+    this.price = this.route.snapshot.paramMap.get('id');
   }
 
 }

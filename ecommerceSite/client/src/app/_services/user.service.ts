@@ -21,23 +21,18 @@ export class UserService {
     }
 
     update( products: Product , user : User ) {
-        alert(products.productName + " " + user.firstName +"  user service.ts");
-         return this.http.put('/users/test' ,{products : products , user : user});
+        return this.http.put('/users/test' ,{products : products , user : user});
      }
     updateuser( productName : string , user : User){
-         
         return this.http.put('/users/updateuser', {productName :productName , user: user});        
      }
-     updatFinalCart(  users : User){
-        alert("its me!! user service  "+ users.firstName);
-       return this.http.put('/users/finalUpdate', users);        
+     updatFinalCart(  user : User){
+        return this.http.put('/users/finalUpdate', {user : user});        
     }
-
     delete(_id: string) {
         return this.http.delete('/users/' + _id);
     }
-   finalPrice(user : User , op : number){
-        
+    finalPrice(user : User , op : number){
        return this.http.put('/users/finalPrice', {user : user , op :op});        
     } 
 }

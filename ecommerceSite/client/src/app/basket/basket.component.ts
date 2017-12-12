@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { User } from '../_models/index';
@@ -6,7 +6,7 @@ import { AlertService, UserService } from '../_services/index';
 import { Product } from '../_models/index';
 import { ProductService } from '../_services/index';
 
-var totalPrice =0;
+
 @Component({
   moduleId: module.id,
   templateUrl: 'basket.component.html',
@@ -26,13 +26,13 @@ export class BasketComponent implements OnInit {
   users: User[] = [];
   products : Product[] = [];
   appState = 'default';
-  op; // ordr price with shipping
-  fp; //final price of component
-  productQuant;
-  q;
+  op = 0; // ordr price with shipping
+  fp = 0; //final price of component
+  totalPrice =0;
+ 
   
-
-
+  paymentOrderPrice :number = 10;
+  @Output() onPayment = new EventEmitter<number>();
 
   constructor(
     private route: ActivatedRoute,
@@ -55,30 +55,31 @@ export class BasketComponent implements OnInit {
 }
   finalPrice(){
     var userCartLength= this.currentUser.cart.length;
-    
+  
     //calculate the total price of the items in users cart
 
     for(var i=0; i <userCartLength; i++ ){
-        totalPrice=    totalPrice +  (this.currentUser.cart[i].productPrice * this.q); 
+       this.totalPrice=    this.totalPrice +  (this.currentUser.cart[i].productPrice); 
     }
-    this.fp = totalPrice;
+    this.fp = this.totalPrice;
+    alert(this.fp);
     
 
   }
   orderSummary(){
     //display the order summary with shipping
       var orderPrice = 0;
-      orderPrice = totalPrice + 10;
+      orderPrice = this.totalPrice + 10;
       this.op = orderPrice;
       
   }
   orderDiscount(){
    // calculate the discount 
    //alert(this.model.item.cartQuantity);
-    totalPrice = totalPrice - ( (totalPrice * 0.10) );
+   this.totalPrice = this.totalPrice - ( (this.totalPrice * 0.50) );
     
     this.orderSummary();
-    alert(this.productQuant);
+    
   }
   cartObjectDelete(productName: string , user : User)
   {        
@@ -96,15 +97,29 @@ export class BasketComponent implements OnInit {
           });
   }
     
-    loadQuant(q){
-    
-    this.productQuant = q;
-    }
-    updateBasket(){
-       alert(this.productQuant);
-        //alert(this.productQuant);
-    }
+  
+    proPayment(paymentPrice : number){
+          alert(paymentPrice);
+          this.onPayment.emit(paymentPrice);
 
+    }
+    finalPaymentCartDelete(users :User){
+      this.appState='edit';
+      alert("its me!! .ts  " + users.firstName);
+      this.userService.updatFinalCart(users)
+      .subscribe(
+          data => {
+               this.alertService.success('Transaction Done !!', true);
+               this.loadAllUsers();
+               
+          },
+         
+          error => {
+             this.alertService.error(error);
+          });
+
+    }
+    
 
 
   

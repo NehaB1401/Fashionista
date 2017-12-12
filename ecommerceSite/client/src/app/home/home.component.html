@@ -441,7 +441,7 @@
 
                 <form class="navbar-form" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" [(ngModel)] ="searchtext">
+                        <input type="text" class="form-control" placeholder="Search" id= "text" [(ngModel)] ="text">
                         <span class="input-group-btn">
 
                             <button (click) = "searchProd()" type="submit" class="btn btn-primary">
@@ -573,7 +573,9 @@
                     <div class="product-slider">
                        
 
-                        <div class="item" *ngFor="let product of products">
+                        <!-- <div class="item" *ngFor="let product of products"> -->
+                                <div class="item row"  style="width:300%;">
+                                        <div class="col-md-4" *ngFor="let product of products">
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">
@@ -595,9 +597,9 @@
                                 </a>
                                 <div class="text">
                                     <h3>
-                                        <a href="detail.html"> {{product.productName}}</a>
+                                        <a> {{product.productDesc}}</a>
                                     </h3>
-                                    <p class="price"> {{product.price}}</p>
+                                    <p class="price"> <b>{{product.price}}</b></p>
                                     <button (click)="addToCart(product, currentUser)">add to cart</button>
                                     <a class="btn btn-default navbar-toggle" [routerLink]="['/basket']">
                                         <i class="fa fa-shopping-cart"></i>
@@ -611,7 +613,7 @@
                             <!-- /.product -->
 
                         </div>
-
+</div>
 
                         <div class="item">
                             <div class="product">

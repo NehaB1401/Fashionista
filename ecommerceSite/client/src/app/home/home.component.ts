@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
     msgCount: number = 0;
     socket: any;
 
-    searchtext;
+    text;
 
     constructor(private userService: UserService,
         private productService: ProductService,
@@ -150,7 +150,7 @@ export class HomeComponent implements OnInit {
         this.exitedUser = false;
     }
     searchProd(){
-        alert(this.searchtext);
+        alert(this.text);
     }
     addToCart(product: Product , user : User)
     {   
