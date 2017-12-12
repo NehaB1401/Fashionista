@@ -48,6 +48,7 @@ export class MentshirtsComponent {
  message: string;
  msgCount: number = 0;
  check;
+ id;
 
   constructor(
 
@@ -66,6 +67,14 @@ export class MentshirtsComponent {
     this.productService.getAll().subscribe(products => { this.products = products; });
     this.update12Products();
 
+    this.id = this.route.snapshot.paramMap.get('id');
+    //alert(this.id);
+
+  }
+
+  reload(){
+    
+    this.productService.getAll().subscribe(products => { this.products = products; });
   }
   updateallProducts() {
     this.productService.getAll().subscribe(products => {
@@ -75,16 +84,16 @@ export class MentshirtsComponent {
   update9Products() {
     this.productService.getAll().subscribe(products => {
       this.products = products;
-      this.products.splice(1, 12);
+     // this.products.splice(1, 12);
 
     });
   }
   update12Products() {
     this.productService.getAll().subscribe(products => {
       this.products = products;
-      this.products.splice(12);
+     // this.products.splice(12);
       this.length = products.length();
-      alert(products.length);
+      //alert(products.length);
     });
   }
 
@@ -257,9 +266,9 @@ export class MentshirtsComponent {
              this.alertService.error(error);
           });
   }
-  onVoted(passValue: number) {
-    this.check = passValue;
-  }
+  // onVoted(passValue: number) {
+  //   this.check = passValue;
+  // }
 
 
 }

@@ -21,6 +21,7 @@ import { ContactComponent } from './contact/index';
 import { FaqComponent } from './faq/index';
 import { MentshirtsComponent } from './mentshirts/index';
 import { WomentshirtsComponent } from './womentshirts/index';
+import { ProductdetailsComponent } from './productdetails/index';
 
 @NgModule({
     imports: [
@@ -42,7 +43,8 @@ import { WomentshirtsComponent } from './womentshirts/index';
         ContactComponent,
         FaqComponent,
         MentshirtsComponent,
-        WomentshirtsComponent
+        WomentshirtsComponent,
+        ProductdetailsComponent
     ],
     providers: [
         customHttpProvider,

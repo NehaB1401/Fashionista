@@ -277,16 +277,16 @@
                                             <h5>Casuals</h5>
                                             <ul>
                                                 <li>
-                                                    <a [routerLink]="['/mentshirts']">T-shirts</a>
+                                                    <a [routerLink]="['/mentshirts', 1]">T-shirts</a>
                                                 </li>
                                                 <li>
-                                                    <a href="category.html">Jeans</a>
+                                                    <a [routerLink]="['/mentshirts', 2]">Jeans</a>
                                                 </li>
                                                 <li>
-                                                    <a href="category.html">Jackets</a>
+                                                    <a [routerLink]="['/mentshirts', 3]">Jackets</a>
                                                 </li>
                                                 <li>
-                                                    <a href="category.html">Polos</a>
+                                                    <a [routerLink]="['/mentshirts', 4]">Polos</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -604,9 +604,7 @@
                                                 <strong>Show</strong>
                                                 <a (click)="update12Products();" [routerLink]="['/mentshirts']" class="btn btn-default btn-sm btn-primary">12</a>
                                                 <a (click)="update9Products();" class="btn btn-default btn-sm">9</a>
-                                                <a (click)="updateallProducts();" [routerLink]="['/mentshirts']" class="btn btn-default btn-sm">All</a> products
-                                                 
-                                                 {{check}}
+                                                <a (click)="updateallProducts();" [routerLink]="['/mentshirts']" class="btn btn-default btn-sm">All</a> products {{check}}
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
@@ -632,23 +630,21 @@
                             <!-- <div ng-repeat="product in products"> -->
 
                             <!-- <div *ngIf= "i < 12"> -->
-                            <div class="col-md-4 col-sm-6">
-
-                                <div class="product">
-
-
-                                    <div *ngIf="product.genType == 'men'">
+                            <div *ngIf="id == '1'">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="product">
                                         <div *ngIf="product.wearType == 'casuals'">
                                             <div *ngIf="product.categoryType == 'tshirts'">
                                                 <div class="flip-container">
                                                     <div class="flipper">
                                                         <div class="front">
-                                                            <a (click)="productDetails();" [routerLink]="['/product-details']">
+                                                            <a (click)="productDetails();" [routerLink]="['/productdetails', product]">
+                                                                <!--{ prod: product, getsize: product.size[0].small } -->
                                                                 <img src="assets/img/{{product.frontImage}}" alt="" class="img-responsive">
                                                             </a>
                                                         </div>
                                                         <div class="back">
-                                                            <a (click)="productDetails();" [routerLink]="['/product-details']">
+                                                            <a (click)="productDetails();" [routerLink]="['/productdetails', product]">
                                                                 <img src="assets/img/{{product.backImage}}" alt="" class="img-responsive">
                                                             </a>
                                                         </div>
@@ -669,8 +665,135 @@
                                                     </p>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div *ngIf="id == '2'">
+                                <div class="col-md-4 col-sm-6">
+
+                                    <div class="product">
+
+                                        <div *ngIf="product.wearType == 'casuals'">
+                                            <div *ngIf="product.categoryType == 'jeans'">
+                                                <div class="flip-container">
+                                                    <div class="flipper">
+                                                        <div class="front">
+                                                            <a (click)="productDetails();" [routerLink]="['/productdetails', product]">
+                                                                <img src="assets/img/{{product.frontImage}}" alt="" class="img-responsive">
+                                                            </a>
+                                                        </div>
+                                                        <div class="back">
+                                                            <a (click)="productDetails();" [routerLink]="['/productdetails', product]">
+                                                                <img src="assets/img/{{product.backImage}}" alt="" class="img-responsive">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a href="detail.html" class="invisible">
+                                                    <img src="assets/img/{{product.frontImage}}" alt="" class="img-responsive">
+                                                </a>
+                                                <div class="text">
+                                                    <h3>
+                                                        <a href="detail.html">{{product.productDesc}}</a>
+                                                    </h3>
+                                                    <p class="price">${{product.price}}</p>
+                                                    <p class="buttons">
+                                                        <a href="detail.html" class="btn btn-default">View detail</a>
+                                                        <a href="basket.html" class="btn btn-primary">
+                                                            <i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="id == '3'">
+                                <div class="col-md-4 col-sm-6">
+
+                                    <div class="product">
+
+                                        <div *ngIf="product.wearType == 'casuals'">
+                                            <div *ngIf="product.categoryType == 'jackets'">
+                                                <div class="flip-container">
+                                                    <div class="flipper">
+                                                        <div class="front">
+                                                            <a (click)="productDetails();" [routerLink]="['/productdetails', product]">
+                                                                <img src="assets/img/{{product.frontImage}}" alt="" class="img-responsive">
+                                                            </a>
+                                                        </div>
+                                                        <div class="back">
+                                                            <a (click)="productDetails();" [routerLink]="['/productdetails', product]">
+                                                                <img src="assets/img/{{product.backImage}}" alt="" class="img-responsive">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a href="detail.html" class="invisible">
+                                                    <img src="assets/img/{{product.frontImage}}" alt="" class="img-responsive">
+                                                </a>
+                                                <div class="text">
+                                                    <h3>
+                                                        <a href="detail.html">{{product.productDesc}}</a>
+                                                    </h3>
+                                                    <p class="price">${{product.price}}</p>
+                                                    <p class="buttons">
+                                                        <a href="detail.html" class="btn btn-default">View detail</a>
+                                                        <a href="basket.html" class="btn btn-primary">
+                                                            <i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="id == '4'">
+                                <div class="col-md-4 col-sm-6">
+
+                                    <div class="product">
+
+                                        <div *ngIf="product.wearType == 'casuals'">
+                                            <div *ngIf="product.categoryType == 'polos'">
+                                                <div class="flip-container">
+                                                    <div class="flipper">
+                                                        <div class="front">
+                                                            <a (click)="productDetails();" [routerLink]="['/productdetails', product]">
+                                                                <img src="assets/img/{{product.frontImage}}" alt="" class="img-responsive">
+                                                            </a>
+                                                        </div>
+                                                        <div class="back">
+
+                                                            <a (click)="productDetails();" [routerLink]="['/productdetails', { prod: product, getsize: product.size[0].small }]">
+                                                                <img src="assets/img/{{product.backImage}}" alt="" class="img-responsive">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a href="detail.html" class="invisible">
+                                                    <img src="assets/img/{{product.frontImage}}" alt="" class="img-responsive">
+                                                </a>
+                                                <div class="text">
+                                                    <h3>
+                                                        <a (click)="productDetails();" [routerLink]="['/productdetails', { prod: product, getsize: product.size.small }]">{{product.productDesc}}</a>
+                                                        Hi {{product.size[0]}}
+                                                    </h3>
+                                                    <p class="price">${{product.price}}</p>
+                                                    <p class="buttons">
+                                                        <a (click)="productDetails();" [routerLink]="['/productdetails', { prod: product, getsize: product.size.small }]" class="btn btn-default">View detail</a>
+                                                        <a href="basket.html" class="btn btn-primary">
+                                                            <i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                 </div>
                                 <!-- </div> -->
                             </div>

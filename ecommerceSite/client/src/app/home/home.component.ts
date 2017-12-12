@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit {
     msgCount: number = 0;
     socket: any;
 
+    searchtext;
 
     constructor(private userService: UserService,
         private productService: ProductService,
@@ -147,6 +148,9 @@ export class HomeComponent implements OnInit {
         this.resFlag = false;
         this.newUser = false;
         this.exitedUser = false;
+    }
+    searchProd(){
+        alert(this.searchtext);
     }
     addToCart(product: Product , user : User)
     {   

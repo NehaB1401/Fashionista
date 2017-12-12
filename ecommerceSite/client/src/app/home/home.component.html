@@ -237,16 +237,16 @@
                                             <h5>Casuals</h5>
                                             <ul>
                                                 <li>
-                                                    <a [routerLink]="['/mentshirts']">T-shirts</a>
+                                                    <a [routerLink]="['/mentshirts', 1]">T-shirts</a>
                                                 </li>
                                                 <li>
-                                                    <a href="category.html">Jeans</a>
+                                                    <a [routerLink]="['/mentshirts', 2]">Jeans</a>
+                                                </li>
+                                                <li>    
+                                                    <a [routerLink]="['/mentshirts', 3]">Jackets</a>
                                                 </li>
                                                 <li>
-                                                    <a href="category.html">Jackets</a>
-                                                </li>
-                                                <li>
-                                                    <a href="category.html">Polos</a>
+                                                    <a [routerLink]="['/mentshirts', 4]">Polos</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -441,10 +441,10 @@
 
                 <form class="navbar-form" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Search" [(ngModel)] ="searchtext">
                         <span class="input-group-btn">
 
-                            <button type="submit" class="btn btn-primary">
+                            <button (click) = "searchProd()" type="submit" class="btn btn-primary">
                                 <i class="fa fa-search"></i>
                             </button>
 

@@ -12,6 +12,8 @@ import { FaqComponent } from './faq/index';
 import { AuthGuard } from './_guards/index';
 import { MentshirtsComponent } from './mentshirts/index';
 import { WomentshirtsComponent } from './womentshirts/index';
+import { Component } from '@angular/core/src/metadata/directives';
+import { ProductdetailsComponent } from './productdetails/index';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -23,9 +25,11 @@ const appRoutes: Routes = [
     { path: 'payment/:id', component: PaymentComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'faq', component: FaqComponent },
+    { path: 'mentshirts/:id', component: MentshirtsComponent},
     { path: 'mentshirts', component: MentshirtsComponent},
     { path: 'womentshirts', component: WomentshirtsComponent },
-    
+    { path: 'productdetails/:prod', component: ProductdetailsComponent},
+    { path: 'productdetails', component: ProductdetailsComponent},
     // Neha~ Start of changes 
     { path: 'home', component: HomeComponent},
     // Neha~ End of changes
