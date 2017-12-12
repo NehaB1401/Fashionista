@@ -14,11 +14,9 @@ service.getAll = getAll;
 service.getById = getById;
 service.create = create;
 service.update = update;
-//service.delete = _delete;
 service.updateUser = _delete;
 service.updateUserFinal = updateFinalCart;
 service.finalPrices = finalPrices;
-
 
 module.exports = service;
 
@@ -121,11 +119,7 @@ function create(userParam) {
 
 function update(productsParam , userParam ) {
     var deferred = Q.defer();
-    console.log("Inside server service");
-    console.log(productsParam._id + " " + userParam.firstName);
-   // console.log(productParam._id);
-    console.log(userParam._id);
-   
+    
     db.users.findById(userParam._id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
@@ -159,7 +153,6 @@ function update(productsParam , userParam ) {
                 }
     };
        
-       
         // update password if it was entered
         if (userParam.password) {
             set.hash = bcrypt.hashSync(userParam.password, 10);
@@ -171,10 +164,6 @@ function update(productsParam , userParam ) {
            { _id: mongo.helper.toObjectID(userParam._id) },
            
           { $set : set,  $push : push},
-          
-        
-           
-
            
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
@@ -190,8 +179,6 @@ function update(productsParam , userParam ) {
 function _delete(productName , userParam ) {
     var deferred = Q.defer();
 
-    
-   console.log("Inside final service"+userParam._id+""+productName);
     db.users.findById(userParam._id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
@@ -222,14 +209,12 @@ function _delete(productName , userParam ) {
            }
        }
 
-       
         // update password if it was entered
         if (userParam.password) {
             set.hash = bcrypt.hashSync(userParam.password, 10);
         }
         let userTestCart = userParam.cart;
         
-       // console.log(userParam.cart);
         db.users.update(
            { _id: mongo.helper.toObjectID(userParam._id) },
            
@@ -246,19 +231,14 @@ function _delete(productName , userParam ) {
   return deferred.promise;
 }
 
-function updateFinalCart( usersParam ) {
+function updateFinalCart( userParam ) {
     var deferred = Q.defer();
-        console.log(usersParam.lastName);
-   // console.log("server " + userParam.firstName )
-   
-    db.users.findById(usersParam._id, function (err, user) {
+    db.users.findById(userParam._id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
-        if (users.username !== usersParam.username) {
-          //  console.log(user.firstName);
-            // username has changed so check if the new username is already taken
+        if (user.username !== userParam.username) {
             db.users.findOne(
-                { usersname: usersParam.username },
+                { usersname: userParam.username },
                 function (err, user) {
                     if (err) deferred.reject(err.name + ': ' + err.message);
                     
@@ -272,42 +252,37 @@ function updateFinalCart( usersParam ) {
     function updateFinal() {
        
         var set = {
-            
-            username: usersParam.username,
-            cart :{
-
-            }
+            username: userParam.username
         };
       
-
-       
         // update password if it was entered
-        if (usersParam.password) {
-            set.hash = bcrypt.hashSync(usersParam.password, 10);
+        if (userParam.password) {
+            set.hash = bcrypt.hashSync(userParam.password, 10);
         }
-        let userTestCart = usersParam.cart;
+        let userTestCart = userParam.cart;
         
        // console.log(userParam.cart);
-        db.users.update(
-           { _id: mongo.helper.toObjectID(usersParam._id) },
+        db.user.update(
+           { _id: mongo.helper.toObjectID(userParam._id) },
            
-          { $set : set},
+          { username: userParam.username,
+            _id: userParam._id,
+            username: userParam.username,
+            password: userParam.password,
+            firstName: userParam.firstName,
+            lastName: userParam.lastName
+          },
            
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
 
                 deferred.resolve();
-            });
-
-            
+            });  
     }
   return deferred.promise;
 }
 function finalPrices(userParam , opParam  ) {
     var deferred = Q.defer();
-    
-   // console.log(productParam._id);
-    console.log(userParam._id);
    
     db.users.findById(userParam._id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
@@ -331,7 +306,6 @@ function finalPrices(userParam , opParam  ) {
       
         // fields to update
         var set = {
-            
             updateFinalCart: op
         };
         var push = {
@@ -339,7 +313,7 @@ function finalPrices(userParam , opParam  ) {
             productName : productsParam.productName,
             productPrice : productsParam.price,
             cartQuantity : productsParam.totalAvailability
-                }
+        }
     };
        
        
@@ -349,15 +323,10 @@ function finalPrices(userParam , opParam  ) {
         }
         let userTestCart = userParam.cart;
         
-       // console.log(userParam.cart);
         db.users.update(
            { _id: mongo.helper.toObjectID(userParam._id) },
            
           { $set : set,  $push : push},
-          
-        
-           
-
            
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);

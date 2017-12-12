@@ -67,7 +67,6 @@ function getCurrent(req, res) {
 }
 
 function update(req, res) {
-    console.log("Controller");
     
     userService.update(req.body.products , req.body.user)
         .then(function () {
@@ -79,9 +78,7 @@ function update(req, res) {
 }
 
 function updateuser(req, res) {
-        
-        console.log("its not me!!");
-        console.log(req.body.user._id);
+       
     userService.updateUser(req.body.productName , req.body.user)
         .then(function () {
             res.sendStatus(200);
@@ -92,9 +89,7 @@ function updateuser(req, res) {
 }
 
 function updateFinalCart(req, res) {
-    console.log("its  me controller!!");
-    console.log( req.body.users._id + "Controller");
-    userService.updateUserFinal( req.body.users)
+    userService.updateUserFinal( req.body.user)
     .then(function () {
         res.sendStatus(200);
     })
@@ -114,9 +109,7 @@ function _delete(req, res) {
 }
 function finalPrice(req, res) {
     
-    console.log("its not me!!");
-    console.log(req.body.user._id);
-userService.finalPrices(req.body.user , req.body.op)
+    userService.finalPrices(req.body.user , req.body.op)
     .then(function () {
         res.sendStatus(200);
     })

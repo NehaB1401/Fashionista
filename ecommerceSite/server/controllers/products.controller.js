@@ -39,16 +39,11 @@ function getCurrent(req, res) {
 }
 
 function update(req, res) {
-    console.log("Controller");
-    console.log( req.body);
     productService.update(req.params._id, req.body)
-     
         .then(function () {
-          
             res.sendStatus(200);
         })
         .catch(function (err) {
-           
             res.status(400).send(err);
         });
 }
@@ -64,6 +59,7 @@ function _delete(req, res) {
 }
 
 function create(req, res) {
+    console.log("server reached");
     productService.create(req.body)
         .then(function () {
             res.sendStatus(200);

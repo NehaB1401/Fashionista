@@ -54,7 +54,7 @@ function getById(_id) {
 function create(productParam) {
 
     var deferred = Q.defer();
-    console.log(productParam.frontImage);
+
     // validation
     db.products.findOne(
         { productName: productParam.productName },
@@ -72,6 +72,7 @@ function create(productParam) {
     function createProduct() {
         // set product object to productParam without the cleartext password
         var product = _.omit(productParam, 'password');
+
         db.products.insert(
             product,
             function (err, doc) {
@@ -86,9 +87,9 @@ function create(productParam) {
 
 function update(_id, productParam) {
     var deferred = Q.defer();
-    console.log("Hello "+productParam);
+
     // validation
-    db.products.findById(_id, function (err, product) {
+    db.products.findById(_id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         if (product.productName !== productParam.productName) {
